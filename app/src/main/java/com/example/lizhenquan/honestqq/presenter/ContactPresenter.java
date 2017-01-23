@@ -6,4 +6,6 @@ package com.example.lizhenquan.honestqq.presenter;
 
 public interface ContactPresenter {
     void initContact();
+
+    void updateDataFromServer();
 }

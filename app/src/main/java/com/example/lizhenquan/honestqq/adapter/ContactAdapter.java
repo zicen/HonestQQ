@@ -37,7 +37,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.Contatct
 
     @Override
     public void onBindViewHolder(ContatctViewHolder holder, int position) {
-        String contact = contactList.get(position);
+        final String contact = contactList.get(position);
         holder.mTvusername.setText(contact);
         String initial = StringUtils.getInitial(contact);
         holder.mTvsection.setText(initial);
@@ -57,6 +57,25 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.Contatct
                 holder.mTvsection.setVisibility(View.VISIBLE);
             }
         }
+
+        //设置接口回调
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mOnContactListener != null) {
+                    mOnContactListener.onClick(contact);
+                }
+            }
+        });
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if (mOnContactListener != null) {
+                    mOnContactListener.onLongClick(contact);
+                }
+                return true;
+            }
+        });
     }
 
     @Override
@@ -75,5 +94,17 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.Contatct
             mTvsection = (TextView) itemView.findViewById(R.id.tv_section);
             mTvusername = (TextView) itemView.findViewById(R.id.tv_username);
         }
+    }
+
+    /**
+     * 接口回调，条目点击事件，以及长按点击事件的实现
+     */
+    public interface OnContactListener{
+        void onClick(String contact);
+        void onLongClick(String contact);
+    }
+    private OnContactListener mOnContactListener;
+    public void setOnContactListener(OnContactListener onContactListener){
+        this.mOnContactListener = onContactListener;
     }
 }

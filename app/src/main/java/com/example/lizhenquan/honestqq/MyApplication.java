@@ -7,9 +7,12 @@ import android.util.Log;
 
 import com.avos.avoscloud.AVOSCloud;
 import com.example.lizhenquan.honestqq.db.DBUtils;
+import com.example.lizhenquan.honestqq.event.ContactEvent;
+import com.hyphenate.EMContactListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
 
+import org.greenrobot.eventbus.EventBus;
 import org.litepal.LitePalApplication;
 
 import java.util.Iterator;
@@ -67,7 +70,46 @@ public class MyApplication extends Application {
         EMClient.getInstance().init(this, options);
         //在做打包混淆时，关闭debug模式，避免消耗不必要的资源
         EMClient.getInstance().setDebugMode(true);
+
+        initContactListener();
     }
+
+    private void initContactListener() {
+
+        EMClient.getInstance().contactManager().setContactListener(new EMContactListener() {
+            @Override
+            public void onContactAdded(String s) {
+                ContactEvent contactEvent = new ContactEvent();
+                contactEvent.isAdded = true;
+                contactEvent.username = s;
+                EventBus.getDefault().post(contactEvent);
+            }
+
+            @Override
+            public void onContactDeleted(String s) {
+                ContactEvent contactEvent = new ContactEvent();
+                contactEvent.isAdded = false;
+                contactEvent.username = s;
+                EventBus.getDefault().post(contactEvent);
+            }
+
+            @Override
+            public void onContactInvited(String s, String s1) {
+
+            }
+
+            @Override
+            public void onContactAgreed(String s) {
+
+            }
+
+            @Override
+            public void onContactRefused(String s) {
+
+            }
+        });
+    }
+
     private String getAppName(int pID) {
         String processName = null;
         ActivityManager am = (ActivityManager) this.getSystemService(ACTIVITY_SERVICE);

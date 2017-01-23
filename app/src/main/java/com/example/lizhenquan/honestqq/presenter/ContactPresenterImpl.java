@@ -41,6 +41,12 @@ public class ContactPresenterImpl implements ContactPresenter {
 
     }
 
+    @Override
+    public void updateDataFromServer() {
+        String currentUser = EMClient.getInstance().getCurrentUser();
+        updateFromServer(currentUser);
+    }
+
     private void updateFromServer(final String currentUser) {
 
         ThreadUtils.runOnSubThread(new Runnable() {

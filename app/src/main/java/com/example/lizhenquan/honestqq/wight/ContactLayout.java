@@ -1,6 +1,7 @@
 package com.example.lizhenquan.honestqq.wight;
 
 import android.content.Context;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -19,6 +20,7 @@ public class ContactLayout extends RelativeLayout {
     private RecyclerView mRecyclerView;
     private TextView mTextView;
     private SlideBar mSlideBar;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     public ContactLayout(Context context) {
         this(context,null);
@@ -36,8 +38,27 @@ public class ContactLayout extends RelativeLayout {
         mRecyclerView = (RecyclerView) findViewById(R.id.recycleview_contact);
         mTextView = (TextView) findViewById(R.id.tv_float);
         mSlideBar = (SlideBar) findViewById(R.id.slidebar);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        //设置下拉刷新颜色
+        mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent),
+                getResources().getColor(R.color.colorPrimary));
     }
 
+    /**
+     * 使用代理提供出去下刷新的监听事件
+     * @param listener
+     */
+    public void setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener listener){
+        mSwipeRefreshLayout.setOnRefreshListener(listener);
+    }
+
+    /**
+     * 使用代理将下拉刷新的隐藏方法提供出去
+     * @param isRefresh
+     */
+    public void setRefreshing(boolean isRefresh) {
+        mSwipeRefreshLayout.setRefreshing(isRefresh);
+    }
     /**
      * 利用代理设计模式来将RecycleView的setAdapter方法设置出去
      */
