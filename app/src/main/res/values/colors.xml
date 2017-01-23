@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#00ACFF</color>
+    <color name="colorPrimaryDark">#00ACFF</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="btnPress">#00A1DB</color>
+    <color name="btnNomal">#00ACFF</color>
+    <color name="grey">#9c9c9c</color>
+    <color name="greyShallow">#F6FAFB</color>
+    <color name="white">#fff</color>
+    <color name="line">#DBDEDC</color>
+    <color name="grey_search">#f3f3f3</color>
+</resources>

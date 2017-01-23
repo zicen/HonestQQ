@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="#fff"
+              android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/plugin_iv_image"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_margin="10dp"
+        android:src="@mipmap/game"/>
+
+    <TextView
+        android:id="@+id/plugin_tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:text="游戏"
+        android:textColor="#000"
+        android:textSize="20sp"/>
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center_vertical"
+        android:src="@mipmap/fyc"/>
+
+</LinearLayout>
