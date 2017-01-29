@@ -2,19 +2,41 @@ package com.example.lizhenquan.honestqq;
 
 import android.app.ActivityManager;
 import android.app.Application;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.ComponentName;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.util.Log;
 
 import com.avos.avoscloud.AVOSCloud;
 import com.example.lizhenquan.honestqq.db.DBUtils;
 import com.example.lizhenquan.honestqq.event.ContactEvent;
+import com.example.lizhenquan.honestqq.utils.ThreadUtils;
+import com.example.lizhenquan.honestqq.utils.ToastUtils;
+import com.example.lizhenquan.honestqq.view.BaseActivity;
+import com.example.lizhenquan.honestqq.view.ChatActivity;
+import com.example.lizhenquan.honestqq.view.LoginActivity;
+import com.example.lizhenquan.honestqq.view.MainActivity;
+import com.hyphenate.EMConnectionListener;
 import com.hyphenate.EMContactListener;
+import com.hyphenate.EMError;
+import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.chat.EMMessageBody;
 import com.hyphenate.chat.EMOptions;
+import com.hyphenate.chat.EMTextMessageBody;
+import com.hyphenate.exceptions.HyphenateException;
 
 import org.greenrobot.eventbus.EventBus;
 import org.litepal.LitePalApplication;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -24,22 +46,50 @@ import java.util.List;
 
 public class MyApplication extends Application {
     private static final String TAG = "tag";
-
+    private ActivityManager mActivityManager;
+    private NotificationManager mNotificationManager;
+    private SoundPool mSoundPool;
+    private int mDuanSound;
+    private int mYuluSound;
+    private List<BaseActivity> mBaseActivities ;
     @Override
     public void onCreate() {
         super.onCreate();
+       // LeakCanary.install(this);
+        mActivityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+        mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         initHuanXin();
         initLeanCloud();
         initLitepal();
 
         initDBUtils();
+        initSoundPool();
+        mBaseActivities = new ArrayList<>();
     }
+
+
+    public void addActivity(BaseActivity activity) {
+        if (!mBaseActivities.contains(activity)) {
+            mBaseActivities.add(activity);
+        }
+    }
+
+
+    public void removeActivity(BaseActivity activity) {
+        mBaseActivities.remove(activity);
+    }
+
 
     private void initDBUtils() {
         new DBUtils(this);
 
     }
-
+    private void initSoundPool() {
+        mSoundPool = new SoundPool(2, AudioManager.STREAM_MUSIC,0);
+        //预加载音乐
+        mDuanSound = mSoundPool.load(this, R.raw.duan, 1);
+        mYuluSound = mSoundPool.load(this, R.raw.yulu, 1);
+    }
     private void initLitepal() {
         LitePalApplication.initialize(this);
     }
@@ -70,8 +120,122 @@ public class MyApplication extends Application {
         EMClient.getInstance().init(this, options);
         //在做打包混淆时，关闭debug模式，避免消耗不必要的资源
         EMClient.getInstance().setDebugMode(true);
-
+        //初始化联系人监听器
         initContactListener();
+        //初始化聊天监听
+        initChatListener();
+        //初始化连接状态监听
+        initConnectListener();
+
+    }
+
+    private void initConnectListener() {
+        EMClient.getInstance().addConnectionListener(new EMConnectionListener() {
+            @Override
+            public void onConnected() {
+            }
+
+            @Override
+            public void onDisconnected(int i) {
+                if (i== EMError.USER_LOGIN_ANOTHER_DEVICE){
+                    //被挤掉线了
+                    //重新跳转到登录界面
+                    Intent intent = new Intent(MyApplication.this, LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                    //将app中的所有的Activity全部销毁
+                    for (BaseActivity activity : mBaseActivities) {
+                        activity.finish();
+                    }
+
+                    startActivity(intent);
+                    ThreadUtils.runOnUIThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ToastUtils.showToast(getApplicationContext(),"您的账号在其他设备登录了，请重新登录！");
+                        }
+                    });
+
+
+                }
+            }
+        });
+    }
+
+    private void initChatListener() {
+        EMMessageListener msgListener = new EMMessageListener() {
+
+            @Override
+            public void onMessageReceived(List<EMMessage> messages) {
+                //收到消息
+                EMMessage emMessage = messages.get(0);
+                /**
+                 * 判断当前App是否是在后台，如果是后台，则收到消息时再通知栏显示
+                 */
+                if (isRuningBackground()) {
+                    showshowNotification(emMessage);
+                    //播放长声音
+                    mSoundPool.play(mYuluSound, 1, 1, 0, 0, 1);
+                } else {
+                    mSoundPool.play(mDuanSound, 1, 1, 0, 0, 1);
+                }
+                EventBus.getDefault().post(emMessage);
+            }
+
+            @Override
+            public void onCmdMessageReceived(List<EMMessage> messages) {
+                //收到透传消息
+            }
+
+            @Override
+            public void onMessageReadAckReceived(List<EMMessage> messages) {
+                //收到已读回执
+            }
+
+            @Override
+            public void onMessageDeliveryAckReceived(List<EMMessage> message) {
+                //收到已送达回执
+            }
+
+            @Override
+            public void onMessageChanged(EMMessage message, Object change) {
+                //消息状态变动
+            }
+        };
+        EMClient.getInstance().chatManager().addMessageListener(msgListener);
+    }
+
+    private void showshowNotification(EMMessage emMessage) {
+        String message = "";
+        EMMessageBody body = emMessage.getBody();
+        if (body instanceof EMTextMessageBody) {
+            EMTextMessageBody emTextMessageBody = (EMTextMessageBody) body;
+             message = emTextMessageBody.getMessage();
+        }
+
+        Intent mainIntent = new Intent(this,MainActivity.class);
+        //因为在非Activity中不允许启动Activity，如果要启动必须添加如下flag
+        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        Intent chatIntent = new Intent(this, ChatActivity.class);
+        chatIntent.putExtra("username",emMessage.getFrom());
+        Intent[] intents = {mainIntent,chatIntent};
+
+        PendingIntent pendingIntent = PendingIntent.getActivities(this,1,intents,PendingIntent.FLAG_UPDATE_CURRENT);
+        Notification notification = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            notification = new Notification.Builder(this)
+                    .setAutoCancel(true) //消息点击之后可以自动删除
+                    .setPriority(Notification.PRIORITY_MAX)//设置通知的优先级
+                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.default_avatar))//大图标
+                    .setSmallIcon(R.mipmap.message)
+                    .setContentTitle("你有一条新消息")
+                    .setContentText(message)
+                    .setContentInfo("来自"+emMessage.getFrom())
+                    .setContentIntent(pendingIntent)
+                    .build();
+        }
+        mNotificationManager.notify(1,notification);
     }
 
     private void initContactListener() {
@@ -94,8 +258,15 @@ public class MyApplication extends Application {
             }
 
             @Override
-            public void onContactInvited(String s, String s1) {
-
+            public void onContactInvited(String username, String reason) {
+                //收到好友邀请
+                //直接同意对象为好友
+                try {
+                    EMClient.getInstance().contactManager().acceptInvitation(username);
+                } catch (HyphenateException e) {
+                    e.printStackTrace();
+                    Log.d(TAG, "onContactInvited: 添加好友失败："+e);
+                }
             }
 
             @Override
@@ -128,5 +299,23 @@ public class MyApplication extends Application {
             }
         }
         return processName;
+    }
+
+    private boolean isRuningBackground(){
+        /**
+         * 获取手机中所有正在运行的任务栈
+         * 需要权限： <uses-permission android:name="android.permission.GET_TASKS"/>
+         */
+        List<ActivityManager.RunningTaskInfo> runningTasks = mActivityManager.getRunningTasks(100);
+        //获取第一个任务栈
+        ActivityManager.RunningTaskInfo runningTaskInfo = runningTasks.get(0);
+        //获取任务栈中第一个Activity
+        ComponentName topActivity = runningTaskInfo.topActivity;
+        //如果这个Activity的包名和app的包名一致则说明在前台
+        if (topActivity.getPackageName().equals(getPackageName())){
+            return false;
+        }else {
+            return true;
+        }
     }
 }

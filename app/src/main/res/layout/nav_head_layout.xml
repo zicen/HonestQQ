@@ -22,7 +22,7 @@
         android:drawableLeft="@mipmap/default_avatar"
         android:text="子辰"
         android:textColor="#fff"
-        android:textSize="35sp"/>
+        android:textSize="30sp"/>
 
     <LinearLayout
         android:id="@+id/ll_level"

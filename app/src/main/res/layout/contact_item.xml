@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    android:layout_marginBottom="3dp"
-    android:foreground="?attr/selectableItemBackground"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="3dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+
 <LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:foreground="?attr/selectableItemBackground"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -21,8 +15,9 @@
             android:id="@+id/tv_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#E7E7E7"
+            android:background="#f0f0f0"
             android:padding="10dp"
+            android:paddingLeft="20dp"
             android:text="A"/>
 
         <LinearLayout
@@ -54,4 +49,3 @@
 
     </LinearLayout>
 </LinearLayout>
-</android.support.v7.widget.CardView>

@@ -11,9 +11,9 @@
 <ImageView
     android:layout_gravity="center_horizontal"
     android:layout_width="60dp"
-    android:layout_marginTop="30dp"
+    android:layout_marginTop="60dp"
     android:layout_marginBottom="30dp"
-    android:src="@mipmap/default_avatar"
+    android:src="@mipmap/gco"
     android:layout_height="60dp"/>
 <android.support.design.widget.TextInputLayout
     android:layout_width="match_parent"

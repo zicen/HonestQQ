@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.lizhenquan.honestqq.wight.SlidingButtonView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:background="@android:color/white"
+    android:layout_marginBottom="1dp"
+    >
+    <!--滑动时内容的布局-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <TextView
+            android:id="@+id/tv_delete"
+            android:layout_height="match_parent"
+            android:layout_width="80dp"
+            android:gravity="center"
+            android:layout_toRightOf="@+id/layout_content"
+            android:textSize="20sp"
+            android:text="删 除"
+            android:background="@drawable/btn_click_red_havebackground"
+            android:textColor="#fff"
+            />
+        <!--没有滑动时内容的布局-->
+        <RelativeLayout
+            android:id="@+id/layout_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/text"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:textSize="50dp"
+                android:textColor="#DD000000"
+                android:background="@drawable/btn_click_black_havebackground"
+                />
+            <ImageView
+                android:id="@+id/iv_avatar"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="5dp"
+                android:src="@mipmap/avatar3"/>
+
+            <TextView
+                android:id="@+id/tv_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_toRightOf="@id/iv_avatar"
+                android:text="zhangsan"
+                android:textAllCaps="false"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/tv_msg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/iv_avatar"
+                android:layout_margin="5dp"
+                android:layout_toRightOf="@id/iv_avatar"
+                android:singleLine="true"
+                android:text="你好"
+                android:textAllCaps="false"
+                android:textColor="#9c9c9c"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_margin="5dp"
+                android:singleLine="true"
+                android:text="12:12"
+                android:textAllCaps="false"
+                android:textColor="#9c9c9c"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tv_unread"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/iv_avatar"
+                android:layout_alignParentRight="true"
+                android:layout_margin="5dp"
+                android:background="@drawable/unread_bk"
+                android:gravity="center"
+                android:padding="2dp"
+                android:text="9"
+                android:textColor="#ffffff"
+                android:textSize="10sp"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</com.example.lizhenquan.honestqq.wight.SlidingButtonView>

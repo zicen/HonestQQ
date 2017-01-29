@@ -8,4 +8,7 @@ public interface ContactPresenter {
     void initContact();
 
     void updateDataFromServer();
+
+    void deleteContact(String contact);
+
 }

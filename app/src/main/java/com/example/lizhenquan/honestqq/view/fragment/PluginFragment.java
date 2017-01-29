@@ -25,6 +25,8 @@ public class PluginFragment extends BaseFragment implements View.OnClickListener
     private View mFoot;
     private MyListView mPlugin_list_foot;
     private ImageButton mIb_weather;
+    private PluginListAdapter mAdapter;
+    private PluginListAdapter mAdapter1;
 
     @Override
     protected View initView() {
@@ -43,13 +45,22 @@ public class PluginFragment extends BaseFragment implements View.OnClickListener
 
     @Override
     protected void initData() {
-        PluginListAdapter adapter1 = new PluginListAdapter(mContext,title2,image2);
-        mPlugin_list_foot.setAdapter(adapter1);
+        mAdapter1 = new PluginListAdapter(mContext,title2,image2);
+        mPlugin_list_foot.setAdapter(mAdapter1);
         mList1.addHeaderView(mHeader);
         mList1.addFooterView(mFoot);
-        PluginListAdapter adapter = new PluginListAdapter(mContext, title, image);
-        mList1.setAdapter(adapter);
+        mAdapter = new PluginListAdapter(mContext, title, image);
+        mList1.setAdapter(mAdapter);
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mList1 = null;
+        mAdapter = null;
+        mAdapter1 = null;
+        mPlugin_list_foot = null;
     }
 
     @Override

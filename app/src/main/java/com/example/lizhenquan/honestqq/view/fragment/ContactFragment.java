@@ -1,6 +1,7 @@
 package com.example.lizhenquan.honestqq.view.fragment;
 
 
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,6 +14,7 @@ import com.example.lizhenquan.honestqq.presenter.ContactPresenter;
 import com.example.lizhenquan.honestqq.presenter.ContactPresenterImpl;
 import com.example.lizhenquan.honestqq.utils.ToastUtils;
 import com.example.lizhenquan.honestqq.view.BaseActivity;
+import com.example.lizhenquan.honestqq.view.ChatActivity;
 import com.example.lizhenquan.honestqq.view.ContactView;
 import com.example.lizhenquan.honestqq.wight.ContactLayout;
 
@@ -78,9 +80,20 @@ public class ContactFragment extends BaseFragment implements ContactView, SwipeR
     }
 
     @Override
+    public void onDelete(String contact, boolean isSuccess, String msg) {
+        if (isSuccess) {
+            Snackbar.make(mContactLayout,"删除"+contact+"成功",Snackbar.LENGTH_SHORT).show();
+        } else {
+            Snackbar.make(mContactLayout,"删除"+contact+"失败"+msg,Snackbar.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         EventBus.getDefault().unregister(this);
+        mContactLayout = null;
+        mContactAdapter = null;
     }
 
     @Override
@@ -91,8 +104,10 @@ public class ContactFragment extends BaseFragment implements ContactView, SwipeR
 
     @Override
     public void onClick(String contact) {
-        ToastUtils.showToast(mContext,contact+"被点击了，进入聊天页面");
-        //TODO
+        Intent intent = new Intent();
+        intent.setClass(mContext, ChatActivity.class);
+        intent.putExtra("username",contact);
+        startActivity(intent);
     }
 
     @Override
@@ -103,7 +118,7 @@ public class ContactFragment extends BaseFragment implements ContactView, SwipeR
                     public void onClick(View view) {
                         //TODO
                         //删除好友
-                        ToastUtils.showToast(mContext,"删除好友"+contact);
+                        mContactPresenter.deleteContact(contact);
                     }
                 }).show();
     }

@@ -5,9 +5,10 @@
              tools:context="com.example.lizhenquan.honestqq.view.fragment.ConversationFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="消息页面"/>
+        android:layout_height="match_parent"
+      />
 
 </FrameLayout>

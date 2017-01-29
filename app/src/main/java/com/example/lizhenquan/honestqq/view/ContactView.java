@@ -12,4 +12,6 @@ public interface ContactView {
     void oninitContacts(List<String> contactsList);
 
     void onUpdateContacts(boolean isSuccess, String msg);
+
+    void onDelete(String contact, boolean isSuccess, String msg);
 }

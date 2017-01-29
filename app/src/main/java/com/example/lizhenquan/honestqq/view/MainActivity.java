@@ -9,23 +9,35 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.ashokvarma.bottomnavigation.BadgeItem;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.example.lizhenquan.honestqq.R;
 import com.example.lizhenquan.honestqq.view.fragment.BaseFragment;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMMessage;
 
-public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener {
-    private static final String TAG = "MainActivity";
-    private String[] arr         = {"消息", "联系人", "动态"};
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener{
+    private static final String   TAG = "MainActivity";
+    private              String[] arr = {"消息", "联系人", "动态"};
 
     private Toolbar             mToolbar;
     private BottomNavigationBar mBottom_navigation_bar;
-    private TextView mTv_title;
-    private NavigationView mNavigation;
+    private TextView            mTv_title;
+    private NavigationView      mNavigation;
+    private RelativeLayout      mHeaderView;
+    private TextView            mTv_nicname;
+    private BadgeItem           mBadgeItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +47,18 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         mTv_title = (TextView) findViewById(R.id.tv_title);
         mBottom_navigation_bar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
         mNavigation = (NavigationView) findViewById(R.id.navigation);
+        mHeaderView = (RelativeLayout) mNavigation.getHeaderView(0);
+        mTv_nicname = (TextView) mHeaderView.findViewById(R.id.tv_nicname);
         mNavigation.setNavigationItemSelectedListener(this);
         mToolbar.setTitle("");
+        String currentUser = EMClient.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            mTv_nicname.setText(currentUser);
+        }
         setSupportActionBar(mToolbar);
         initBottomNavigationBar();
         initFragment();
+        EventBus.getDefault().register(this);
     }
 
     private void initFragment() {
@@ -49,11 +68,11 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
          */
         FragmentManager supportFragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
-        for(int i=0;i<arr.length;i++){
+        for (int i = 0; i < arr.length; i++) {
 
-            Fragment fragmentByTag = supportFragmentManager.findFragmentByTag(i+"");
-            if (fragmentByTag!=null){
-                Log.d(TAG, "initFragment: 发现有老的缓存Fragment"+fragmentByTag);
+            Fragment fragmentByTag = supportFragmentManager.findFragmentByTag(i + "");
+            if (fragmentByTag != null) {
+                Log.d(TAG, "initFragment: 发现有老的缓存Fragment" + fragmentByTag);
                 fragmentTransaction.remove(fragmentByTag);
             }
         }
@@ -62,13 +81,23 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         /**
          * 默认只添加第一个Fragment
          */
-        getSupportFragmentManager().beginTransaction().add(R.id.fl_content,FragmentFactory.getFragmentByPosition(0),"0")
+        getSupportFragmentManager().beginTransaction().add(R.id.fl_content, FragmentFactory.getFragmentByPosition(0), "0")
                 .commit();
         mTv_title.setText(arr[0]);
     }
 
     private void initBottomNavigationBar() {
         BottomNavigationItem conversation_item = new BottomNavigationItem(R.mipmap.conversation_selected_2, arr[0]);
+        //创建一个角标对象
+        mBadgeItem = new BadgeItem();
+        //设置位置为右侧
+        mBadgeItem.setGravity(Gravity.RIGHT);
+        mBadgeItem.setBackgroundColor("#ff0000");
+        mBadgeItem.setText("0");
+        mBadgeItem.setTextColor("#ffffff");
+        mBadgeItem.show();
+        conversation_item.setBadgeItem(mBadgeItem);
+
         BottomNavigationItem contact_item = new BottomNavigationItem(R.mipmap.contact_selected_2, arr[1]);
         BottomNavigationItem plugin_item = new BottomNavigationItem(R.mipmap.plugin_selected_2, arr[2]);
         mBottom_navigation_bar.addItem(conversation_item);
@@ -81,9 +110,28 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        updateUnreadMsgCount();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    private void updateUnreadMsgCount() {
+        int unreadMsgsCount = EMClient.getInstance().chatManager().getUnreadMsgsCount();
+        if (unreadMsgsCount > 99) {
+            mBadgeItem.setText("99+");
+            mBadgeItem.show();
+        } else if (unreadMsgsCount > 0) {
+            mBadgeItem.setText("" + unreadMsgsCount);
+            mBadgeItem.show();
+        } else {
+            mBadgeItem.hide();
+        }
     }
 
     @Override
@@ -102,7 +150,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
                 break;
             case R.id.add_friend:
-
+                startActivity(AddFriendActivity.class, false);
 
                 break;
             case R.id.sweep:
@@ -126,19 +174,19 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     @Override
     public void onTabSelected(int position) {  //切换Fragment
 
-                /**
-                 * 1.修改标题
-                 * 2.切换Fragment
-                 */
-                mTv_title.setText(arr[position]);
+        /**
+         * 1.修改标题
+         * 2.切换Fragment
+         */
+        mTv_title.setText(arr[position]);
 
-                BaseFragment fragment = FragmentFactory.getFragmentByPosition(position);
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                if (!fragment.isAdded()) {
-                    fragmentTransaction.add(R.id.fl_content,fragment,position+"");
-                }
-                fragmentTransaction.show(fragment);
-               fragmentTransaction.commit();
+        BaseFragment fragment = FragmentFactory.getFragmentByPosition(position);
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        if (!fragment.isAdded()) {
+            fragmentTransaction.add(R.id.fl_content, fragment, position + "");
+        }
+        fragmentTransaction.show(fragment);
+        fragmentTransaction.commit();
 
     }
 
@@ -159,16 +207,31 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(EMMessage emMessage) {
+        updateUnreadMsgCount();
+    }
+
+    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-                    case R.id.menu_shezhi:
-                    startActivity(SettingActivity.class,false);
-                        break;
+            case R.id.menu_shezhi:
+                startActivity(SettingActivity.class, false);
+                break;
 
-                    default:
-                        break;
+            default:
+                break;
 
-                }
+        }
         return false;
     }
+
+
 }
