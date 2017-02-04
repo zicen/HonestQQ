@@ -44,6 +44,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     private TextView            mTv_nicname;
     private BadgeItem           mBadgeItem;
     private SettingPresenter mSettingPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
