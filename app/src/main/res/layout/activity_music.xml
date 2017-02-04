@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_music"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.lizhenquan.honestqqa.view.PluginItemActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toorbar"
+        android:background="@color/colorPrimary"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+        <TextView
+            android:id="@+id/music_tv_back"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:text="动态"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            android:drawableLeft="@mipmap/onw"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="标题"
+            android:textColor="#fff"
+            android:textSize="22sp"
+            android:id="@+id/tv_title"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </android.support.v7.widget.Toolbar>
+    <ProgressBar
+        android:id="@+id/progress_load"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="3dip"
+        android:progressDrawable="@drawable/progress_bg"
+        android:visibility="gone"
+
+        />
+    <WebView
+    android:layout_width="match_parent"
+    android:id="@+id/webview_music"
+    android:layout_height="match_parent"></WebView>
+</LinearLayout>

@@ -48,10 +48,10 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/sun"/>
 
-        <ImageView
+       <!-- <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/mooth"/>
+            android:src="@mipmap/mooth"/>-->
     </LinearLayout>
 <TextView
     android:layout_below="@id/ll_level"

@@ -5,10 +5,10 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.lizhenquan.honestqq.view.MainActivity">
+    tools:context="com.example.lizhenquan.honestqqa.view.MainActivity">
 
     <fragment
-        android:name="com.example.lizhenquan.honestqq.view.fragment.ChooseAreaFragment"
+        android:name="com.example.lizhenquan.honestqqa.view.fragment.ChooseAreaFragment"
         android:id="@+id/choose_area_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

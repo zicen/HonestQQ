@@ -27,7 +27,7 @@
         android:background="@drawable/ease_show_head_toast_bg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-<com.example.lizhenquan.honestqq.wight.SlideBar
+<com.example.lizhenquan.honestqqa.wight.SlideBar
     android:id="@+id/slidebar"
     android:layout_alignParentRight="true"
     android:layout_width="30dp"

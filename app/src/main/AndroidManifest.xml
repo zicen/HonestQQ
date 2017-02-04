@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.lizhenquan.honestqq">
+          package="com.example.lizhenquan.honestqqa">
 
     <!-- Required -->
     <uses-permission android:name="android.permission.VIBRATE"/>
@@ -53,7 +53,9 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".view.MainActivity" android:launchMode="singleTask">
+        <activity
+            android:name=".view.MainActivity"
+            android:launchMode="singleTask">
         </activity>
         <activity
             android:name=".view.SplashActivity"
@@ -74,8 +76,6 @@
         </activity>
         <activity android:name=".view.WeatherActivity">
         </activity>
-        <activity android:name=".view.CoolWeatherActivity">
-        </activity>
 
         <service
             android:name=".service.AutoUpdateService"
@@ -88,6 +88,8 @@
         <activity android:name=".view.AddFriendActivity">
         </activity>
         <activity android:name=".view.ChatActivity">
+        </activity>
+        <activity android:name=".view.PluginItemActivity">
         </activity>
     </application>
 

@@ -7,7 +7,7 @@
     android:background="@mipmap/login_bk"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.lizhenquan.honestqq.view.LoginActivity">
+    tools:context="com.example.lizhenquan.honestqqa.view.LoginActivity">
 <ImageView
     android:layout_gravity="center_horizontal"
     android:layout_width="60dp"
@@ -26,7 +26,6 @@
         android:id="@+id/et_username"
         android:hint="用户名"
         android:layout_height="wrap_content"/>
-
 </android.support.design.widget.TextInputLayout><android.support.design.widget.TextInputLayout
     android:layout_width="match_parent"
     android:id="@+id/til_pwd"
