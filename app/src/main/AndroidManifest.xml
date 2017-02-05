@@ -91,6 +91,8 @@
         </activity>
         <activity android:name=".view.PluginItemActivity">
         </activity>
+        <activity android:name=".view.FileActivity">
+        </activity>
     </application>
 
 </manifest>

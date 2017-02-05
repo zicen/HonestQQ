@@ -11,4 +11,9 @@
     <style name="FullScreen" parent="AppTheme">
         <item name="android:windowFullscreen">true</item>
     </style>
+
+    <style name="CustomeTabIndicator">
+            <item name="tabIndicatorColor">@color/colorPrimary</item>
+            <item name="tabIndicatorHeight">2dp</item>
+        </style>
 </resources>

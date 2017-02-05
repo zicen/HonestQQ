@@ -1,6 +1,7 @@
 package com.example.lizhenquan.honestqqa.view;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -244,7 +245,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 showToast("等待开发中。。。");
                 break;
             case R.id.menu_wenjian:
-                showToast("等待开发中。。。");
+                Intent intent = new Intent(this,FileActivity.class);
+                startActivity(intent);
                 break;
             case R.id.menu_richeng:
                 showToast("等待开发中。。。");
