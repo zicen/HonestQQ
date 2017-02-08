@@ -39,7 +39,19 @@ public class PluginFragment extends BaseFragment implements View.OnClickListener
             "http://sports.qq.com/","https://ke.qq.com/course/list"};
     private ImageButton BaiduMap;
     private ImageButton MyPlugin;
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mList1 = null;
+        mAdapter = null;
+        mAdapter1 = null;
+        mPlugin_list_foot = null;
+        mHeader = null;
+        mIb_weather = null;
+        BaiduMap = null;
+        MyPlugin = null;
+        mIntent = null;
+    }
     @Override
     protected View initView() {
         View view = View.inflate(mContext, R.layout.fragment_plugin, null);
@@ -74,14 +86,7 @@ public class PluginFragment extends BaseFragment implements View.OnClickListener
 
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mList1 = null;
-        mAdapter = null;
-        mAdapter1 = null;
-        mPlugin_list_foot = null;
-    }
+
 
     @Override
     public void onClick(View view) {

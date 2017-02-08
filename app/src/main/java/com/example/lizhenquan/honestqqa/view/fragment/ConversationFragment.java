@@ -82,6 +82,7 @@ public class ConversationFragment extends BaseFragment implements ConversationVi
         EventBus.getDefault().unregister(this);
         //释放View资源
         mRecyclerView = null;
+        mConversationAdapter = null;
     }
 
 

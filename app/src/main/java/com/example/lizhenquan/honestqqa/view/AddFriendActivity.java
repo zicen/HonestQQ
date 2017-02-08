@@ -30,6 +30,12 @@ public class AddFriendActivity extends BaseActivity implements AddFriendView, Ad
     private SearchView         mSearchView;
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend);
