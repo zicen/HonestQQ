@@ -9,9 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.lizhenquan.honestqqa.MyApplication;
-import com.squareup.leakcanary.RefWatcher;
-
 /**
  * Created by lizhenquan on 2017/1/17.
  */
@@ -28,8 +25,8 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        RefWatcher refWatcher = MyApplication.getRefWatcher(getActivity());
-        refWatcher.watch(this);
+        /*RefWatcher refWatcher = MyApplication.getRefWatcher(getActivity());
+        refWatcher.watch(this);*/
     }
     @Nullable
     @Override

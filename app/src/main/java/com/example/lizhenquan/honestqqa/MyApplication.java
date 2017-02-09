@@ -6,7 +6,6 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
@@ -20,7 +19,7 @@ import com.example.lizhenquan.honestqqa.event.ContactEvent;
 import com.example.lizhenquan.honestqqa.utils.ThreadUtils;
 import com.example.lizhenquan.honestqqa.utils.ToastUtils;
 import com.example.lizhenquan.honestqqa.view.BaseActivity;
-import com.example.lizhenquan.honestqqa.view.ChatActivity;
+import com.example.lizhenquan.honestqqa.view.ChatActivityEaseUI;
 import com.example.lizhenquan.honestqqa.view.LoginActivity;
 import com.example.lizhenquan.honestqqa.view.MainActivity;
 import com.hyphenate.EMConnectionListener;
@@ -32,10 +31,9 @@ import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMMessageBody;
 import com.hyphenate.chat.EMOptions;
 import com.hyphenate.chat.EMTextMessageBody;
+import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.controller.EaseUI;
 import com.hyphenate.exceptions.HyphenateException;
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
 
 import org.greenrobot.eventbus.EventBus;
 import org.litepal.LitePalApplication;
@@ -56,17 +54,17 @@ public class MyApplication extends Application {
     private int mDuanSound;
     private int mYuluSound;
     private List<BaseActivity> mBaseActivities ;
-    public static RefWatcher getRefWatcher(Context context) {
+   /* public static RefWatcher getRefWatcher(Context context) {
         MyApplication application = (MyApplication) context.getApplicationContext();
         return application.refWatcher;
     }
 
-    private RefWatcher refWatcher;
+    private RefWatcher refWatcher;*/
 
     @Override
     public void onCreate() {
         super.onCreate();
-        refWatcher = LeakCanary.install(this);
+       // refWatcher = LeakCanary.install(this);
      //   LeakCanary.install(this);
         mActivityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
         mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -238,8 +236,10 @@ public class MyApplication extends Application {
         //因为在非Activity中不允许启动Activity，如果要启动必须添加如下flag
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        Intent chatIntent = new Intent(this, ChatActivity.class);
-        chatIntent.putExtra("username",emMessage.getFrom());
+        Intent chatIntent = new Intent(this, ChatActivityEaseUI.class);
+        chatIntent.putExtra(EaseConstant.EXTRA_USER_ID,emMessage.getFrom());
+        chatIntent.putExtra(EaseConstant.EXTRA_CHAT_TYPE,EMMessage.ChatType.Chat);
+
         Intent[] intents = {mainIntent,chatIntent};
 
         PendingIntent pendingIntent = PendingIntent.getActivities(this,1,intents,PendingIntent.FLAG_UPDATE_CURRENT);
