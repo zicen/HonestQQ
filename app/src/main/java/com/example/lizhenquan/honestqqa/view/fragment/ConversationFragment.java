@@ -13,10 +13,11 @@ import com.example.lizhenquan.honestqqa.R;
 import com.example.lizhenquan.honestqqa.adapter.ConversationAdapter;
 import com.example.lizhenquan.honestqqa.presenter.ConversationPresenter;
 import com.example.lizhenquan.honestqqa.presenter.ConversationPresenterImpl;
-import com.example.lizhenquan.honestqqa.view.ChatActivity;
+import com.example.lizhenquan.honestqqa.view.ChatActivityEaseUI;
 import com.example.lizhenquan.honestqqa.view.ConversationView;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
+import com.hyphenate.easeui.EaseConstant;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -89,8 +90,9 @@ public class ConversationFragment extends BaseFragment implements ConversationVi
     @Override
     public void onItemClick(View view, int position, EMConversation emConversation) {
         Intent intent = new Intent();
-        intent.setClass(mContext, ChatActivity.class);
-        intent.putExtra("username",emConversation.getUserName());
+        intent.setClass(mContext, ChatActivityEaseUI.class);
+        intent.putExtra(EaseConstant.EXTRA_USER_ID,emConversation.getUserName());
+        intent.putExtra(EaseConstant.EXTRA_CHAT_TYPE,EMMessage.ChatType.Chat);
         startActivity(intent);
     }
 

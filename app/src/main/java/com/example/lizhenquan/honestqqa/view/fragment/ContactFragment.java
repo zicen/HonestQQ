@@ -1,12 +1,9 @@
 package com.example.lizhenquan.honestqqa.view.fragment;
-
-
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
-
 import com.example.lizhenquan.honestqqa.R;
 import com.example.lizhenquan.honestqqa.adapter.ContactAdapter;
 import com.example.lizhenquan.honestqqa.event.ContactEvent;
@@ -14,10 +11,11 @@ import com.example.lizhenquan.honestqqa.presenter.ContactPresenter;
 import com.example.lizhenquan.honestqqa.presenter.ContactPresenterImpl;
 import com.example.lizhenquan.honestqqa.utils.ToastUtils;
 import com.example.lizhenquan.honestqqa.view.BaseActivity;
-import com.example.lizhenquan.honestqqa.view.ChatActivity;
+import com.example.lizhenquan.honestqqa.view.ChatActivityEaseUI;
 import com.example.lizhenquan.honestqqa.view.ContactView;
 import com.example.lizhenquan.honestqqa.wight.ContactLayout;
-
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.easeui.EaseConstant;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -104,9 +102,14 @@ public class ContactFragment extends BaseFragment implements ContactView, SwipeR
 
     @Override
     public void onClick(String contact) {
-        Intent intent = new Intent();
+       /* Intent intent = new Intent();
         intent.setClass(mContext, ChatActivity.class);
         intent.putExtra("username",contact);
+        startActivity(intent);*/
+        Intent intent = new Intent();
+        intent.setClass(mContext, ChatActivityEaseUI.class);
+        intent.putExtra(EaseConstant.EXTRA_USER_ID,contact);
+        intent.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat);
         startActivity(intent);
     }
 

@@ -76,7 +76,11 @@
         </activity>
         <activity android:name=".view.WeatherActivity">
         </activity>
+        <activity android:name=".view.ChatActivityEaseUI">
+        </activity>
 
+        <activity android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity"></activity>
+        <activity android:name="com.hyphenate.easeui.ui.EaseBaiduMapActivity"></activity>
         <service
             android:name=".service.AutoUpdateService"
             android:enabled="true"
@@ -93,6 +97,15 @@
         </activity>
         <activity android:name=".view.FileActivity">
         </activity>
+
+        <!-- 百度地图所需的service -->
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="3ecea51f560650b1ed8a4b99808f52e8" />
     </application>
 
 </manifest>

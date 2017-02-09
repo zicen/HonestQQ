@@ -49,15 +49,18 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         String userName = emConversation.getUserName();
         holder.mTvUsername.setText(userName);
         EMMessage lastMessage = emConversation.getLastMessage();
-        long msgTime = lastMessage.getMsgTime();
-        holder.mTvTime.setText(DateUtils.getTimestampString(new Date(msgTime)));
+        if (lastMessage != null) {
+            long msgTime = lastMessage.getMsgTime();
+            holder.mTvTime.setText(DateUtils.getTimestampString(new Date(msgTime)));
 
-        EMMessageBody body = lastMessage.getBody();
-        if (body instanceof EMTextMessageBody) {
-            EMTextMessageBody emTextMessageBody = (EMTextMessageBody) body;
-            String message = emTextMessageBody.getMessage();
-            holder.mTvMsg.setText(message);
+            EMMessageBody body = lastMessage.getBody();
+            if (body instanceof EMTextMessageBody) {
+                EMTextMessageBody emTextMessageBody = (EMTextMessageBody) body;
+                String message = emTextMessageBody.getMessage();
+                holder.mTvMsg.setText(message);
+            }
         }
+
         int unreadMsgCount = emConversation.getUnreadMsgCount();
         if (unreadMsgCount > 99) {
             holder.mTvUnread.setText("99+");

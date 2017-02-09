@@ -32,6 +32,7 @@ import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMMessageBody;
 import com.hyphenate.chat.EMOptions;
 import com.hyphenate.chat.EMTextMessageBody;
+import com.hyphenate.easeui.controller.EaseUI;
 import com.hyphenate.exceptions.HyphenateException;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
@@ -75,7 +76,16 @@ public class MyApplication extends Application {
 
         initDBUtils();
         initSoundPool();
+        initEaseUI();
         mBaseActivities = new ArrayList<>();
+    }
+
+    private void initEaseUI() {
+        EMOptions options = new EMOptions();
+        // 默认添加好友时，是不需要验证的，改成需要验证
+        options.setAcceptInvitationAlways(false);
+        EaseUI.getInstance().init(this, options);
+
     }
 
 
@@ -137,6 +147,8 @@ public class MyApplication extends Application {
         initConnectListener();
 
     }
+
+
 
     private void initConnectListener() {
         EMClient.getInstance().addConnectionListener(new EMConnectionListener() {
