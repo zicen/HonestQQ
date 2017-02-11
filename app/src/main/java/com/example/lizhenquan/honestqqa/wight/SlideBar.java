@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.lizhenquan.honestqqa.R;
-import com.example.lizhenquan.honestqqa.adapter.ContactAdapter;
 import com.example.lizhenquan.honestqqa.adapter.SlideBarAdapter;
 import com.example.lizhenquan.honestqqa.utils.StringUtils;
 import com.hyphenate.util.DensityUtil;
@@ -99,8 +98,8 @@ public class SlideBar extends View {
         //获取RecycleView中的所有数据
 
         RecyclerView.Adapter adapter = mRecycleview_contact.getAdapter();
-        ContactAdapter adapter1 = (ContactAdapter) adapter;
-        List<String> data = adapter1.getData();
+        /*ContactAdapter adapter1 = (ContactAdapter) adapter;
+        List<String> data = adapter1.getData();*/
         if (adapter instanceof SlideBarAdapter) {
             SlideBarAdapter slideBarAdapter = (SlideBarAdapter) adapter;
             List<String> dataList = slideBarAdapter.getData();

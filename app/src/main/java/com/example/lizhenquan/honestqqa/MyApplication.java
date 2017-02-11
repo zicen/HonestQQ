@@ -1,7 +1,6 @@
 package com.example.lizhenquan.honestqqa;
 
 import android.app.ActivityManager;
-import android.app.Application;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -42,11 +41,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import cn.smssdk.SMSSDK;
+
 /**
  * Created by lizhenquan on 2017/1/17.
  */
 
-public class MyApplication extends Application {
+public class MyApplication extends android.support.multidex.MultiDexApplication {
     private static final String TAG = "tag";
     private ActivityManager mActivityManager;
     private NotificationManager mNotificationManager;
@@ -75,7 +76,12 @@ public class MyApplication extends Application {
         initDBUtils();
         initSoundPool();
         initEaseUI();
+        initMobSms();
         mBaseActivities = new ArrayList<>();
+    }
+
+    private void initMobSms() {
+        SMSSDK.initSDK(this, "15d5d9bc15762", "6e9211264302886949713acc7be1eef3");
     }
 
     private void initEaseUI() {

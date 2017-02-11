@@ -6,4 +6,6 @@ package com.example.lizhenquan.honestqqa.presenter;
 
 public interface LoginPresenter {
     void login(String username,String pwd);
+
+    void regist(String phone, String phonePassword);
 }

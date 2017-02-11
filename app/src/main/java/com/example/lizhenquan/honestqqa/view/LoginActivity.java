@@ -26,11 +26,17 @@ import com.example.lizhenquan.honestqqa.utils.StringUtils;
 import com.example.lizhenquan.honestqqa.utils.ToastUtils;
 import com.hyphenate.chat.EMClient;
 
+import java.util.HashMap;
+import java.util.Random;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import cn.smssdk.EventHandler;
+import cn.smssdk.SMSSDK;
+import cn.smssdk.gui.RegisterPage;
 
-public class LoginActivity extends BaseActivity implements LoginView,TextView.OnEditorActionListener {
+public class LoginActivity extends BaseActivity implements LoginView, TextView.OnEditorActionListener {
 
     @InjectView(R.id.et_username)
     EditText        mEtUsername;
@@ -46,7 +52,13 @@ public class LoginActivity extends BaseActivity implements LoginView,TextView.On
     TextView        mTvNewuser;
     @InjectView(R.id.activity_login)
     LinearLayout    mActivityLogin;
+    @InjectView(R.id.tv_newuser_sms)
+    TextView        mTvNewuserSms;
     private LoginPresenter mLoginPresenter;
+    private static final String[] arr = {"A", "B", "C", "D", "E", "F", "G", "H",
+            "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S",
+            "T", "U", "V", "W", "X", "Y", "Z"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +89,7 @@ public class LoginActivity extends BaseActivity implements LoginView,TextView.On
         mEtPwd.setText(pwd);
     }
 
-    @OnClick({R.id.btn_login, R.id.tv_newuser})
+    @OnClick({R.id.btn_login, R.id.tv_newuser, R.id.tv_newuser_sms})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_login:
@@ -85,10 +97,35 @@ public class LoginActivity extends BaseActivity implements LoginView,TextView.On
                 break;
             case R.id.tv_newuser:
                 //跳转到注册界面
-                startActivity(RegistActivity.class,false);
-              break;
+                startActivity(RegistActivity.class, false);
+                break;
+            case R.id.tv_newuser_sms:
+                registByMobSms();
+                break;
         }
     }
+
+    private void registByMobSms() {
+        //打开注册页面
+        RegisterPage registerPage = new RegisterPage();
+        registerPage.setRegisterCallback(new EventHandler() {
+            public void afterEvent(int event, int result, Object data) {
+                // 解析注册结果
+                if (result == SMSSDK.RESULT_COMPLETE) {
+                    @SuppressWarnings("unchecked")
+                    HashMap<String, Object> phoneMap = (HashMap<String, Object>) data;
+                    String country = (String) phoneMap.get("country");
+                    String phone = (String) phoneMap.get("phone");
+                    //P层执行注册逻辑
+                    String randomLetter = getRandomLetter();
+
+                    mLoginPresenter.regist(randomLetter + phone, StringUtils.getPhonePassword(phone));
+                }
+            }
+        });
+        registerPage.show(this);
+    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -109,7 +146,7 @@ public class LoginActivity extends BaseActivity implements LoginView,TextView.On
          * 动态权限申请
          */
 
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             //没有权限，系统会弹出一个对话框，当用户点击同意或者拒绝时，系统会回调当前Activity的onRequestPermissionsResult
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             return;
@@ -143,7 +180,7 @@ public class LoginActivity extends BaseActivity implements LoginView,TextView.On
         //显示进度条对话框
         showDialog("正在登录...");
 
-        mLoginPresenter.login(username,pwd);
+        mLoginPresenter.login(username, pwd);
 
     }
 
@@ -172,9 +209,31 @@ public class LoginActivity extends BaseActivity implements LoginView,TextView.On
             EMClient.getInstance().groupManager().loadAllGroups();
             EMClient.getInstance().chatManager().loadAllConversations();
             Log.d("main", "登录聊天服务器成功！");
-            startActivity(MainActivity.class,true);
+            startActivity(MainActivity.class, true);
         } else {
-            ToastUtils.showToast(this,"登录失败!"+msg);
+            ToastUtils.showToast(this, "登录失败!" + msg);
+        }
+    }
+
+    @Override
+    public void onRegist(String phone, String phonePassword, boolean isSuccess, String msg) {
+        if (isSuccess) {
+            showToast("注册成功！密码为电话号码后六位。");
+            mEtUsername.setText(phone);
+            mEtPwd.setText(phonePassword);
+        } else {
+
+        }
+    }
+
+
+    public String getRandomLetter() {
+        Random random = new Random();
+        while (true) {
+            int nextInt = random.nextInt() % 26;
+            if (nextInt >= 0) {
+                return arr[nextInt];
+            }
         }
     }
 }

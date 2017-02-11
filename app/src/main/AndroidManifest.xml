@@ -18,6 +18,12 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
 
     <application
         android:name=".MyApplication"
@@ -81,6 +87,7 @@
 
         <activity android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity"></activity>
         <activity android:name="com.hyphenate.easeui.ui.EaseBaiduMapActivity"></activity>
+
         <service
             android:name=".service.AutoUpdateService"
             android:enabled="true"
@@ -102,10 +109,17 @@
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote" />
+            android:process=":remote"/>
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="3ecea51f560650b1ed8a4b99808f52e8" />
+            android:value="3ecea51f560650b1ed8a4b99808f52e8"/>
+
+        <!--短信验证登录-->
+        <activity
+            android:name="com.mob.tools.MobUIShell"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
     </application>
 
 </manifest>

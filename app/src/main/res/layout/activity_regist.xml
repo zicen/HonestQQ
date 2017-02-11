@@ -34,7 +34,7 @@
     android:layout_height="wrap_content">
     <EditText
         android:imeOptions="actionDone"
-        android:inputType="numberPassword"
+        android:inputType="textPassword"
         android:layout_width="match_parent"
         android:id="@+id/et_pwd"
         android:hint="密码"

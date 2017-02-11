@@ -22,7 +22,8 @@ public class StringUtils {
         if (TextUtils.isEmpty(pwd)) {
             return false;
         } else {
-            return pwd.matches("^\\d{3,20}$");
+            //return pwd.matches("^\\d{3,20}$");
+            return pwd.matches("^\\w+$");
         }
     }
 
@@ -37,5 +38,13 @@ public class StringUtils {
     public static String getDateString(Date date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return dateFormat.format(date);
+    }
+
+    /**
+     * 获取电话号码的后六位作为密码
+     * @return
+     */
+    public static  String getPhonePassword(String phone){
+        return phone.substring(5);
     }
 }
