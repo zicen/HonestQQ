@@ -1,7 +1,6 @@
 package com.example.lizhenquan.honestqqa.view;
 
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -33,7 +32,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener,SettingView{
+public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener, SettingView {
     private static final String   TAG = "MainActivity";
     private              String[] arr = {"消息", "联系人", "动态"};
 
@@ -44,7 +43,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     private RelativeLayout      mHeaderView;
     private TextView            mTv_nicname;
     private BadgeItem           mBadgeItem;
-    private SettingPresenter mSettingPresenter;
+    private SettingPresenter    mSettingPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +65,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         initBottomNavigationBar();
         initFragment();
         EventBus.getDefault().register(this);
-       mSettingPresenter = new SettingPresentImpl(this);
+        mSettingPresenter = new SettingPresentImpl(this);
     }
 
     private void initFragment() {
@@ -153,15 +152,15 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {//更多菜单选项
 
-            case R.id.create_group:
+        /*    case R.id.create_group:
                 showToast("create_group");
 
-                break;
+                break;*/
             case R.id.add_friend:
                 startActivity(AddFriendActivity.class, false);
 
                 break;
-            case R.id.sweep:
+        /*    case R.id.sweep:
 
 
                 break;
@@ -172,9 +171,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             case R.id.take_pic:
 
 
-                break;
-
-
+                break;*/
         }
         return true;
     }
@@ -229,7 +226,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_tequan:
+           /* case R.id.menu_tequan:
                 showToast("QQ会员是腾讯为QQ用户提供的一项增值服务,涵盖了QQ特权、游戏特权、生活特权、装扮特权等80余项精彩特权。其中包括等级加速、多彩气泡、超级群、身份铭牌、个性名片等...");
                 break;
             case R.id.menu_qianbao:
@@ -245,7 +242,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 showToast("等待开发中。。。");
                 break;
             case R.id.menu_wenjian:
-                Intent intent = new Intent(this,FileActivity.class);
+                Intent intent = new Intent(this, FileActivity.class);
                 startActivity(intent);
                 break;
             case R.id.menu_richeng:
@@ -253,7 +250,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 break;
             case R.id.menu_shezhi:
                 startActivity(SettingActivity.class, false);
-                break;
+                break;*/
             case R.id.menu_logout:
                 /**
                  * 1.弹出确认对话框
@@ -295,6 +292,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         if (!isSuccess) {
             showToast(msg);
         }
-        startActivity(LoginActivity.class,true);
+        startActivity(LoginActivity.class, true);
     }
 }

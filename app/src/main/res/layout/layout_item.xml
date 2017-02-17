@@ -15,12 +15,11 @@
             android:id="@+id/tv_delete"
             android:layout_height="match_parent"
             android:layout_width="80dp"
+            android:paddingRight="25dp"
+            android:drawableRight="@mipmap/remove"
             android:gravity="center"
             android:layout_toRightOf="@+id/layout_content"
-            android:textSize="20sp"
-            android:text="删 除"
-            android:background="@drawable/btn_click_red_havebackground"
-            android:textColor="#fff"
+            android:background="@color/colorPrimary"
             />
         <!--没有滑动时内容的布局-->
         <RelativeLayout

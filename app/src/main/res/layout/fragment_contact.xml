@@ -9,4 +9,28 @@
     android:id="@+id/contact_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"></com.example.lizhenquan.honestqqa.wight.ContactLayout>
+    <RelativeLayout
+        android:id="@+id/rl_addnew"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_centerHorizontal="true"
+            android:id="@+id/btn_addnewfriend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:textColor="#Fff"
+            android:background="@drawable/login_selector"
+            android:text="还没有好友哦，现在添加"
+            android:textSize="25sp"/>
+
+        <ImageView
+            android:id="@+id/iv_nofriend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/monkey"/>
+
+    </RelativeLayout>
 </FrameLayout>

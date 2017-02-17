@@ -254,7 +254,7 @@ public class MyApplication extends android.support.multidex.MultiDexApplication 
             notification = new Notification.Builder(this)
                     .setAutoCancel(true) //消息点击之后可以自动删除
                     .setPriority(Notification.PRIORITY_MAX)//设置通知的优先级
-                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.default_avatar))//大图标
+                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.iicon5))//大图标
                     .setSmallIcon(R.mipmap.message)
                     .setContentTitle("你有一条新消息")
                     .setContentText(message)

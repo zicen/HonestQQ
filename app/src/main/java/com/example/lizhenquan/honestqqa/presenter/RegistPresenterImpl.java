@@ -67,6 +67,8 @@ public class RegistPresenterImpl implements RegistPresenter {
                         }
                     });
 
+
+
                 } else {
                     // 失败的话,将错误信息发送给view
                     mRegistView.onRegist(username,pwd,false,e.getMessage());

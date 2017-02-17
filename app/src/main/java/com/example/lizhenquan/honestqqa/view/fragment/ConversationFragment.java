@@ -38,6 +38,7 @@ public class ConversationFragment extends BaseFragment implements ConversationVi
     protected View initView() {
         View view = View.inflate(mContext, R.layout.fragment_conversation, null);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(mContext,
                 DividerItemDecoration.VERTICAL));
@@ -72,6 +73,7 @@ public class ConversationFragment extends BaseFragment implements ConversationVi
     }
     @Override
     public void onInitConversation(List<EMConversation> eMConversationList) {
+
         mConversationAdapter = new ConversationAdapter(eMConversationList,this);
         mRecyclerView.setAdapter(mConversationAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -105,5 +107,6 @@ public class ConversationFragment extends BaseFragment implements ConversationVi
         mConversationPresenter.removeConversation(emConversation);
 
     }
+
 
 }

@@ -4,38 +4,52 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
+import android.widget.Button;
+import android.widget.RelativeLayout;
+
 import com.example.lizhenquan.honestqqa.R;
 import com.example.lizhenquan.honestqqa.adapter.ContactAdapter;
 import com.example.lizhenquan.honestqqa.event.ContactEvent;
 import com.example.lizhenquan.honestqqa.presenter.ContactPresenter;
 import com.example.lizhenquan.honestqqa.presenter.ContactPresenterImpl;
 import com.example.lizhenquan.honestqqa.utils.ToastUtils;
+import com.example.lizhenquan.honestqqa.view.AddFriendActivity;
 import com.example.lizhenquan.honestqqa.view.BaseActivity;
 import com.example.lizhenquan.honestqqa.view.ChatActivityEaseUI;
 import com.example.lizhenquan.honestqqa.view.ContactView;
 import com.example.lizhenquan.honestqqa.wight.ContactLayout;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.EaseConstant;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ContactFragment extends BaseFragment implements ContactView, SwipeRefreshLayout.OnRefreshListener, ContactAdapter.OnContactListener {
+public class ContactFragment extends BaseFragment implements ContactView, SwipeRefreshLayout.OnRefreshListener, ContactAdapter.OnContactListener{
 
     private ContactPresenter mContactPresenter;
     private ContactLayout mContactLayout;
     private ContactAdapter mContactAdapter;
-
+    private RelativeLayout mRl_addnew;
+    private List<String> mData = new ArrayList<>();
     @Override
     protected View initView() {
         View view = View.inflate(mContext, R.layout.fragment_contact, null);
         mContactLayout = (ContactLayout) view.findViewById(R.id.contact_layout);
-
+        mRl_addnew = (RelativeLayout) view.findViewById(R.id.rl_addnew);
+        Button btn_add = (Button) view.findViewById(R.id.btn_addnewfriend);
+        btn_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(mContext, AddFriendActivity.class));
+            }
+        });
         mContactPresenter = new ContactPresenterImpl(this);
         mContactLayout.setOnRefreshListener(this);
 
@@ -55,20 +69,38 @@ public class ContactFragment extends BaseFragment implements ContactView, SwipeR
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(ContactEvent contactEvent){
         ToastUtils.showToast(mContext,contactEvent.isAdded?"添加了"+contactEvent.username:"删除了"+contactEvent.username);
+        if (contactEvent.isAdded) {
+            mRl_addnew.setVisibility(View.GONE);
+            mData.add(contactEvent.username);
+        } else {
+            mData.remove(0);
+        }
         mContactPresenter.updateDataFromServer();
     }
 
     @Override
     public void oninitContacts(List<String> contactsList) {
+        mData.clear();
+        mData.addAll(contactsList);
         mContactAdapter = new ContactAdapter(contactsList);
         mContactLayout.setAdapter(mContactAdapter);
         //设置条目点击事件以及长按点击事件
         mContactAdapter.setOnContactListener(this);
+        if ( mData.size() <= 0) {
+            mRl_addnew.setVisibility(View.VISIBLE);
+        } else {
+            mRl_addnew.setVisibility(View.GONE);
+        }
     }
 
     @Override
     public void onUpdateContacts(boolean isSuccess, String msg) {
         if (isSuccess) {
+            if (mData.size() <= 0) {
+                mRl_addnew.setVisibility(View.VISIBLE);
+            } else {
+                mRl_addnew.setVisibility(View.GONE);
+            }
             mContactAdapter.notifyDataSetChanged();
         } else {
             BaseActivity activity = (BaseActivity) getActivity();
@@ -81,6 +113,12 @@ public class ContactFragment extends BaseFragment implements ContactView, SwipeR
     public void onDelete(String contact, boolean isSuccess, String msg) {
         if (isSuccess) {
             Snackbar.make(mContactLayout,"删除"+contact+"成功",Snackbar.LENGTH_SHORT).show();
+            mData.remove(0);
+            if (mData.size() <= 0) {
+                mRl_addnew.setVisibility(View.VISIBLE);
+            } else {
+                mRl_addnew.setVisibility(View.GONE);
+            }
         } else {
             Snackbar.make(mContactLayout,"删除"+contact+"失败"+msg,Snackbar.LENGTH_SHORT).show();
         }
@@ -125,4 +163,6 @@ public class ContactFragment extends BaseFragment implements ContactView, SwipeR
                     }
                 }).show();
     }
+
+
 }

@@ -28,7 +28,7 @@
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/fsf"
+        android:icon="@mipmap/iicon5"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">

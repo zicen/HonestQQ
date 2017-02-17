@@ -12,7 +12,7 @@ import com.example.lizhenquan.honestqqa.view.fragment.PluginFragment;
 public class FragmentFactory {
     private static ConversationFragment conversationFragment ;
     private static ContactFragment      contactFragment ;
-    private static PluginFragment       pluginFragment ;
+    private static PluginFragment      pluginFragment ;
     public static BaseFragment getFragmentByPosition(int position) {
         switch (position) {
             case 0:

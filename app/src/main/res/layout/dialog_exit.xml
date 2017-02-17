@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="退出QQ可能会使你连续登陆99天的记录归零，QQ达人图标变灰，确定退出？"
+        android:text="退出登录可能会使你无法收到好友的消息，也无法获得软件的相关服务，确定退出？"
         android:textColor="#000"
         android:textSize="18sp"/>
 <ImageView
