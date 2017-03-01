@@ -7,7 +7,7 @@
     android:background="@mipmap/login_bk"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.lizhenquan.honestqqa.view.LoginActivity">
+    tools:context="com.example.lizhenquan.honestqq.view.LoginActivity">
     <ImageView
         android:layout_gravity="center_horizontal"
         android:layout_width="60dp"

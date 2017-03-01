@@ -7,7 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.lizhenquan.honestqqa.view.AddFriendActivity">
+    tools:context="com.example.lizhenquan.honestqq.view.AddFriendActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/add_friend_toolbar"

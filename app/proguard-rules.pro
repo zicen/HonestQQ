@@ -61,6 +61,6 @@
 -ignorewarnings
 
 
--keep class com.example.lizhenquan.honestqqa.model.**{*;}
+-keep class com.example.lizhenquan.honestqq.model.**{*;}
 
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.lizhenquan.honestqqa">
+          package="com.example.lizhenquan.honestqq">
 
     <!-- Required -->
     <uses-permission android:name="android.permission.VIBRATE"/>
@@ -26,9 +26,9 @@
 
 
     <application
-        android:name=".MyApplication"
+        android:name="com.example.lizhenquan.honestqq.MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/iicon5"
+        android:icon="@mipmap/iicon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -60,11 +60,11 @@
         </receiver>
 
         <activity
-            android:name=".view.MainActivity"
+            android:name="com.example.lizhenquan.honestqq.view.MainActivity"
             android:launchMode="singleTask">
         </activity>
         <activity
-            android:name=".view.SplashActivity"
+            android:name="com.example.lizhenquan.honestqq.view.SplashActivity"
             android:theme="@style/FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -73,36 +73,36 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.LoginActivity"
+            android:name="com.example.lizhenquan.honestqq.view.LoginActivity"
             android:launchMode="singleTask">
         </activity>
-        <activity android:name=".view.RegistActivity">
+        <activity android:name="com.example.lizhenquan.honestqq.view.RegistActivity">
         </activity>
-        <activity android:name=".view.CoolWeatherActivity">
+        <activity android:name="com.example.lizhenquan.honestqq.view.CoolWeatherActivity">
         </activity>
-        <activity android:name=".view.WeatherActivity">
+        <activity android:name="com.example.lizhenquan.honestqq.view.WeatherActivity">
         </activity>
-        <activity android:name=".view.ChatActivityEaseUI">
+        <activity android:name="com.example.lizhenquan.honestqq.view.ChatActivityEaseUI">
         </activity>
 
         <activity android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity"></activity>
         <activity android:name="com.hyphenate.easeui.ui.EaseBaiduMapActivity"></activity>
 
         <service
-            android:name=".service.AutoUpdateService"
+            android:name="com.example.lizhenquan.honestqq.service.AutoUpdateService"
             android:enabled="true"
             android:exported="true">
         </service>
 
-        <activity android:name=".view.SettingActivity">
+        <activity android:name="com.example.lizhenquan.honestqq.view.SettingActivity">
         </activity>
-        <activity android:name=".view.AddFriendActivity">
+        <activity android:name="com.example.lizhenquan.honestqq.view.AddFriendActivity">
         </activity>
-        <activity android:name=".view.ChatActivity">
+        <activity android:name="com.example.lizhenquan.honestqq.view.ChatActivity">
         </activity>
-        <activity android:name=".view.PluginItemActivity">
+        <activity android:name="com.example.lizhenquan.honestqq.view.PluginItemActivity">
         </activity>
-        <activity android:name=".view.FileActivity">
+        <activity android:name="com.example.lizhenquan.honestqq.view.FileActivity">
         </activity>
 
         <!-- 百度地图所需的service -->

@@ -5,4 +5,10 @@
         <attr name="rightText" format="boolean"/>
         <attr name="rightImage" format="boolean"/>
     </declare-styleable>
+
+    <declare-styleable name="MineItemLayout">
+        <attr name="minetitle" format="string" />
+        <attr name="image" format="reference" />
+    </declare-styleable>
+
 </resources>

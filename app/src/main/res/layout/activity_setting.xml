@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.lizhenquan.honestqqa.view.SettingActivity">
+    tools:context="com.example.lizhenquan.honestqq.view.SettingActivity">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toorbar"
         android:background="@color/colorPrimary"
@@ -44,17 +44,17 @@
     android:layout_width="match_parent"
     android:background="@color/greyShallow"
     android:layout_height="20dp"/>
-    <com.example.lizhenquan.honestqqa.wight.SettingItemView
+    <com.example.lizhenquan.honestqq.wight.SettingItemView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:rightImage="true"
-        app:title="账号管理"></com.example.lizhenquan.honestqqa.wight.SettingItemView>
+        app:title="账号管理"></com.example.lizhenquan.honestqq.wight.SettingItemView>
 
-    <com.example.lizhenquan.honestqqa.wight.SettingItemView
+    <com.example.lizhenquan.honestqq.wight.SettingItemView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:rightText="true"
-        app:title="手机号码"></com.example.lizhenquan.honestqqa.wight.SettingItemView>
+        app:title="手机号码"></com.example.lizhenquan.honestqq.wight.SettingItemView>
 
     <LinearLayout
         android:id="@+id/ll_setting_item"
@@ -97,54 +97,54 @@
         android:layout_width="match_parent"
         android:background="@color/greyShallow"
         android:layout_height="30dp"/>
-    <com.example.lizhenquan.honestqqa.wight.SettingItemView
+    <com.example.lizhenquan.honestqq.wight.SettingItemView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="消息通知"></com.example.lizhenquan.honestqqa.wight.SettingItemView>
+        app:title="消息通知"></com.example.lizhenquan.honestqq.wight.SettingItemView>
 
-    <com.example.lizhenquan.honestqqa.wight.SettingItemView
+    <com.example.lizhenquan.honestqq.wight.SettingItemView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="聊天记录"></com.example.lizhenquan.honestqqa.wight.SettingItemView>
+        app:title="聊天记录"></com.example.lizhenquan.honestqq.wight.SettingItemView>
 
-    <com.example.lizhenquan.honestqqa.wight.SettingItemView
+    <com.example.lizhenquan.honestqq.wight.SettingItemView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="空间清理"></com.example.lizhenquan.honestqqa.wight.SettingItemView>
+        app:title="空间清理"></com.example.lizhenquan.honestqq.wight.SettingItemView>
 
     <ImageView
         android:layout_width="match_parent"
         android:background="@color/greyShallow"
         android:layout_height="30dp"/>
-    <com.example.lizhenquan.honestqqa.wight.SettingItemView
+    <com.example.lizhenquan.honestqq.wight.SettingItemView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="账号安全"></com.example.lizhenquan.honestqqa.wight.SettingItemView>
+        app:title="账号安全"></com.example.lizhenquan.honestqq.wight.SettingItemView>
 
-    <com.example.lizhenquan.honestqqa.wight.SettingItemView
+    <com.example.lizhenquan.honestqq.wight.SettingItemView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="联系人、隐私"></com.example.lizhenquan.honestqqa.wight.SettingItemView>
+        app:title="联系人、隐私"></com.example.lizhenquan.honestqq.wight.SettingItemView>
 
-    <com.example.lizhenquan.honestqqa.wight.SettingItemView
+    <com.example.lizhenquan.honestqq.wight.SettingItemView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="安全检测"></com.example.lizhenquan.honestqqa.wight.SettingItemView>
+        app:title="安全检测"></com.example.lizhenquan.honestqq.wight.SettingItemView>
 
 
     <ImageView
         android:layout_width="match_parent"
         android:background="@color/greyShallow"
         android:layout_height="50dp"/>
-    <com.example.lizhenquan.honestqqa.wight.SettingItemView
+    <com.example.lizhenquan.honestqq.wight.SettingItemView
         android:id="@+id/siv_fuzhu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="辅助功能"></com.example.lizhenquan.honestqqa.wight.SettingItemView>
-    <com.example.lizhenquan.honestqqa.wight.SettingItemView
+        app:title="辅助功能"></com.example.lizhenquan.honestqq.wight.SettingItemView>
+    <com.example.lizhenquan.honestqq.wight.SettingItemView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="关于QQ与帮助"></com.example.lizhenquan.honestqqa.wight.SettingItemView>
+        app:title="关于QQ与帮助"></com.example.lizhenquan.honestqq.wight.SettingItemView>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

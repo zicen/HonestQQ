@@ -3,8 +3,8 @@
     <dbname value = "cool_weather" />
     <version value = "1"/>
     <list>
-        <mapping class = "com.example.lizhenquan.honestqqa.db.Province"/>
-        <mapping class = "com.example.lizhenquan.honestqqa.db.City"/>
-        <mapping class = "com.example.lizhenquan.honestqqa.db.County"/>
+        <mapping class = "com.example.lizhenquan.honestqq.db.Province"/>
+        <mapping class = "com.example.lizhenquan.honestqq.db.City"/>
+        <mapping class = "com.example.lizhenquan.honestqq.db.County"/>
     </list>
 </litepal>
