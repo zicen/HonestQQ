@@ -6,4 +6,6 @@ package com.example.lizhenquan.honestqq.view;
 
 public interface SettingView {
     void onLogout(boolean isSuccess, String msg);
+
+    void onAddContact(String username, boolean isSuccess, String msg);
 }

@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 <!--<item android:id="@+id/create_group" android:title="创建群聊" android:icon="@mipmap/create_group"></item>-->
 <item android:id="@+id/add_friend" android:title="加好友" android:icon="@mipmap/add_friend"></item>
-<!--<item android:id="@+id/sweep" android:title="扫一扫" android:icon="@mipmap/sweep"></item>
-<item android:id="@+id/send_fast" android:title="面对面快传" android:icon="@mipmap/send_fast"></item>
-<item android:id="@+id/take_pic" android:title="拍摄" android:icon="@mipmap/take_pic"></item>-->
+<item android:id="@+id/sweep" android:title="扫一扫" android:icon="@mipmap/sweep"></item>
+    <item android:id="@+id/myqrcode" android:title="我的二维码" android:icon="@mipmap/qrcode"></item>
+    <!-- <item android:id="@+id/take_pic" android:title="拍摄" android:icon="@mipmap/take_pic"></item>-->
 </menu>

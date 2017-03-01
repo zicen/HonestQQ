@@ -1,6 +1,7 @@
 package com.example.lizhenquan.honestqq.view;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -27,6 +28,7 @@ import com.example.lizhenquan.honestqq.presenter.SettingPresenter;
 import com.example.lizhenquan.honestqq.view.fragment.BaseFragment;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
+import com.zxing.activity.CaptureActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -160,15 +162,15 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 startActivity(AddFriendActivity.class, false);
 
                 break;
-        /*    case R.id.sweep:
-
-
+            case R.id.sweep:
+                //打开扫描界面扫描条形码或二维码
+                Intent openCameraIntent = new Intent(this, CaptureActivity.class);
+                startActivityForResult(openCameraIntent, 0);
                 break;
-            case R.id.send_fast:
-
-
+          case R.id.myqrcode:
+                startActivity(new Intent(this,QRCodeActivity.class));
                 break;
-            case R.id.take_pic:
+          /*    case R.id.take_pic:
 
 
                 break;*/
@@ -286,6 +288,20 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         return false;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //处理扫描结果（在界面上显示）
+        if (requestCode == 0 && resultCode == RESULT_OK) {
+                Bundle bundle = data.getExtras();
+                String scanResult = bundle.getString("result");
+                showToast(scanResult);
+                mSettingPresenter.addFriend(scanResult);
+        }
+    }
+
+
+
 
     @Override
     public void onLogout(boolean isSuccess, String msg) {
@@ -293,5 +309,15 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             showToast(msg);
         }
         startActivity(LoginActivity.class, true);
+    }
+
+    @Override
+    public void onAddContact(String username, boolean isSuccess, String msg) {
+            if (isSuccess) {
+              Log.d("tag","发送好友请求成功！");
+            } else {
+                Log.d("tag","发送好友请求失败！");
+            }
+
     }
 }

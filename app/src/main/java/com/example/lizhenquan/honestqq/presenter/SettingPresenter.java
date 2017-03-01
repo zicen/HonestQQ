@@ -6,4 +6,5 @@ package com.example.lizhenquan.honestqq.presenter;
 
 public interface SettingPresenter {
     void logout();
+    void addFriend(String username);
 }

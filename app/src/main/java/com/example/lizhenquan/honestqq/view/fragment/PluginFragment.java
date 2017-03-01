@@ -63,7 +63,12 @@ public class PluginFragment extends BaseFragment implements View.OnClickListener
 
     private void initCircleImageView() {
          mHeadUrl = mPluginPresenter.getHeadUrl();
-        Glide.with(mContext).load(mHeadUrl).into(mCircleImageView);
+        if (mHeadUrl != null) {
+            Glide.with(mContext).load(mHeadUrl).into(mCircleImageView);
+        }else {
+          mCircleImageView.setImageResource(R.mipmap.avatar3);
+        }
+
     }
 
     @Override
