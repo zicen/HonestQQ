@@ -1,11 +1,13 @@
 package com.example.lizhenquan.honestqq.adapter;
 
 import android.content.Context;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.OvershootInterpolator;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -45,6 +47,10 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
     @Override
     public ConversationViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item, parent, false);
+        view.setScaleX(.6F);
+        view.setScaleY(.6f);
+        ViewCompat.animate(view).scaleX(1).scaleY(1).setDuration(300).setInterpolator(new OvershootInterpolator())
+                .start();
         ConversationViewHolder conversationViewHolder = new ConversationViewHolder(view);
         return conversationViewHolder;
     }
@@ -71,6 +77,11 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
             holder.mTvTime.setText("");
             holder.mTvMsg.setText("");
         }
+        //设置条目加载动画
+        holder.mItemView.setScaleX(.6F);
+        holder.mItemView.setScaleY(.6f);
+        ViewCompat.animate(holder.mItemView).scaleX(1).scaleY(1).setDuration(300).setInterpolator(new OvershootInterpolator())
+                .start();
 
         int unreadMsgCount = emConversation.getUnreadMsgCount();
         if (unreadMsgCount > 99) {
@@ -112,6 +123,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
             holder.mCircleImageView.setImageResource(R.mipmap.avatar3);
         }
 
+
     }
     @Override
     public int getItemCount() {
@@ -126,9 +138,10 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         private final ViewGroup layout_content;
         private final TextView btn_Delete;
         private final CircleImageView mCircleImageView;
-
+        View mItemView;
         public ConversationViewHolder(View itemView) {
             super(itemView);
+            this.mItemView = itemView;
             mTvUsername = (TextView) itemView.findViewById(R.id.tv_username);
             mTvTime = (TextView) itemView.findViewById(R.id.tv_time);
             mTvUnread = (TextView) itemView.findViewById(R.id.tv_unread);

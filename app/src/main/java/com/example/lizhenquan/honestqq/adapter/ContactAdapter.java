@@ -1,10 +1,12 @@
 package com.example.lizhenquan.honestqq.adapter;
 
 import android.content.Context;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.OvershootInterpolator;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -97,6 +99,11 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.Contatct
                 return true;
             }
         });
+       //设置条目加载动画
+        holder.mItemView.setScaleX(.6F);
+        holder.mItemView.setScaleY(.6f);
+        ViewCompat.animate(holder.mItemView).scaleX(1).scaleY(1).setDuration(300).setInterpolator(new OvershootInterpolator())
+                .start();
     }
 
     @Override
@@ -114,9 +121,10 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.Contatct
         TextView        mTvsection;
         TextView        mTvusername;
         CircleImageView mIv_avatar;
-
+        View mItemView;
         public ContatctViewHolder(View itemView) {
             super(itemView);
+            this.mItemView = itemView;
             mTvsection = (TextView) itemView.findViewById(R.id.tv_section);
             mTvusername = (TextView) itemView.findViewById(R.id.tv_username);
             mIv_avatar = (CircleImageView) itemView.findViewById(R.id.iv_avatar);

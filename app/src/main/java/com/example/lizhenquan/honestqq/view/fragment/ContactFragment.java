@@ -54,6 +54,7 @@ public class ContactFragment extends BaseFragment implements ContactView, SwipeR
         mContactPresenter = new ContactPresenterImpl(this);
         mContactLayout.setOnRefreshListener(this);
 
+
         EventBus.getDefault().register(this);
         return mView;
     }
