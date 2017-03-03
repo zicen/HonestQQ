@@ -1,13 +1,11 @@
 package com.example.lizhenquan.honestqq.wight;
 
 import android.content.Context;
-import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.animation.OvershootInterpolator;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -73,6 +71,8 @@ public class ContactLayout extends RelativeLayout {
          */
 
         mRecyclerView.setLayoutManager(new MyLinearLayoutManager(getContext()));
+        MyLinearLayoutManager layoutManager = (MyLinearLayoutManager) mRecyclerView.getLayoutManager();
+        int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
         mRecyclerView.setAdapter(adapter);
 
 

@@ -8,6 +8,7 @@ import com.example.lizhenquan.honestqq.utils.Constant;
 import com.example.lizhenquan.honestqq.view.ConversationView;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
+import com.hyphenate.chat.EMMessage;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,8 +24,10 @@ public class ConversationPresenterImpl implements ConversationPresenter {
 
     private ConversationView mConversationView;
     private AVQuery<AVUser> mUserQuery = new AVQuery<>("_User");
-    ; private List<String> mAvatarUrl = new ArrayList<>();
+    ;
+    private List<String>         mAvatarUrl         = new ArrayList<>();
     private List<EMConversation> eMConversationList = new ArrayList<>();
+
     public ConversationPresenterImpl(ConversationView conversationView) {
         mConversationView = conversationView;
     }
@@ -36,15 +39,22 @@ public class ConversationPresenterImpl implements ConversationPresenter {
         if (allConversations != null && allConversations.size() > 0) {
             eMConversationList.addAll(allConversations.values());
         }
-        Collections.sort(eMConversationList, new Comparator<EMConversation>() {
-            @Override
-            public int compare(EMConversation emConversation, EMConversation emConversation1) {
-                long msgTime = emConversation.getLastMessage().getMsgTime();
-                long msgTime1 = emConversation1.getLastMessage().getMsgTime();
-                int num = (int) (msgTime1 - msgTime);
-                return num==0?(int) msgTime:num;
-            }
-        });
+        if (eMConversationList != null && eMConversationList.size() > 0) {
+            Collections.sort(eMConversationList, new Comparator<EMConversation>() {
+                @Override
+                public int compare(EMConversation emConversation, EMConversation emConversation1) {
+                    EMMessage lastMessage = emConversation.getLastMessage();
+                    if (emConversation != null && lastMessage != null) {
+                        long msgTime = lastMessage.getMsgTime();
+                        long msgTime1 = lastMessage.getMsgTime();
+                        int num = (int) (msgTime1 - msgTime);
+                        return num == 0 ? (int) msgTime : num;
+                    }
+                    return 0;
+                }
+            });
+        }
+
         mConversationView.onInitConversation(eMConversationList);
     }
 

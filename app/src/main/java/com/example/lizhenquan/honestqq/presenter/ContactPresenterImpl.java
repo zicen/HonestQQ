@@ -153,18 +153,12 @@ public class ContactPresenterImpl implements ContactPresenter {
                     final List<String> allContactsFromServer =   EMClient.getInstance().contactManager().getAllContactsFromServer();
                     //获取成功，将网络上的最新数据保存到缓存
                     contactBeanList2.clear();
-                    //通知UI
-                   /* ThreadUtils.runOnUIThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            mContactView.onUpdateContacts(true, contactsList, null);
-                        }
-                    });*/
                     for (int i = 0; i < allContactsFromServer.size(); i++) {
                         String username = allContactsFromServer.get(i);
                         //查询并添加到ContactBean集合中
                         ContactBean contactBean = queryAvatar(username);
                         contactBeanList2.add(contactBean);
+
                     }
                     contactBeanList.clear();
                     contactBeanList.addAll(contactBeanList2);

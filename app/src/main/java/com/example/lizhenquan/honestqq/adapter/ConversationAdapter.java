@@ -56,6 +56,16 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
     }
 
     @Override
+    public void onViewAttachedToWindow(ConversationViewHolder holder) {
+        //设置条目加载动画
+        holder.mItemView.setScaleX(.6F);
+        holder.mItemView.setScaleY(.6f);
+        ViewCompat.animate(holder.mItemView).scaleX(1).scaleY(1).setDuration(300).setInterpolator(new OvershootInterpolator())
+                .start();
+        super.onViewAttachedToWindow(holder);
+    }
+
+    @Override
     public void onBindViewHolder(final ConversationViewHolder holder, final int position) {
         final EMConversation emConversation = eMConversationList.get(position);
         String userName = emConversation.getUserName();
@@ -77,11 +87,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
             holder.mTvTime.setText("");
             holder.mTvMsg.setText("");
         }
-        //设置条目加载动画
-        holder.mItemView.setScaleX(.6F);
-        holder.mItemView.setScaleY(.6f);
-        ViewCompat.animate(holder.mItemView).scaleX(1).scaleY(1).setDuration(300).setInterpolator(new OvershootInterpolator())
-                .start();
+
 
         int unreadMsgCount = emConversation.getUnreadMsgCount();
         if (unreadMsgCount > 99) {

@@ -37,6 +37,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.Contatct
         return contactList == null ? 0 : contactList.size();
     }
 
+
+
     public List<ContactBean> getContactList() {
         if (contactList != null && contactList.size() > 0) {
             return contactList;
@@ -49,11 +51,28 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.Contatct
         mContext = parent.getContext();
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.contact_item, parent, false);
         ContatctViewHolder contatctViewHolder = new ContatctViewHolder(view);
+
         return contatctViewHolder;
     }
 
     @Override
+    public void onViewAttachedToWindow(ContatctViewHolder holder) {
+        //设置条目加载动画
+        holder.itemView.setScaleX(.6F);
+        holder.itemView.setScaleY(.6f);
+        ViewCompat.animate(holder.itemView).scaleX(1).scaleY(1).setDuration(1000).setInterpolator(new OvershootInterpolator())
+                .start();
+        super.onViewAttachedToWindow(holder);
+    }
+
+    @Override
     public void onBindViewHolder(final ContatctViewHolder holder, final int position) {
+ /*       //设置条目加载动画
+        holder.itemView.setScaleX(.6F);
+        holder.itemView.setScaleY(.6f);
+        ViewCompat.animate(holder.itemView).scaleX(1).scaleY(1).setDuration(1000).setInterpolator(new OvershootInterpolator())
+                .start();*/
+
         final String contact = contactList.get(position).username;
         holder.mTvusername.setText(contact);
         String initial = StringUtils.getInitial(contact);
@@ -99,11 +118,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.Contatct
                 return true;
             }
         });
-       //设置条目加载动画
-        holder.mItemView.setScaleX(.6F);
-        holder.mItemView.setScaleY(.6f);
-        ViewCompat.animate(holder.mItemView).scaleX(1).scaleY(1).setDuration(300).setInterpolator(new OvershootInterpolator())
-                .start();
+
     }
 
     @Override
@@ -129,6 +144,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.Contatct
             mTvusername = (TextView) itemView.findViewById(R.id.tv_username);
             mIv_avatar = (CircleImageView) itemView.findViewById(R.id.iv_avatar);
         }
+
+
     }
 
     /**
@@ -145,4 +162,5 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.Contatct
     public void setOnContactListener(OnContactListener onContactListener) {
         this.mOnContactListener = onContactListener;
     }
+
 }
