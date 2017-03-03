@@ -384,7 +384,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             case 2:
                 if (resultCode == RESULT_OK) {
                     // 裁剪图片
-                    File temp = new File(Environment.getExternalStorageDirectory() + "/HonestQQ/myHead/head.jpg");
+                    File temp = new File(Environment.getExternalStorageDirectory() + "/head.jpg");
                     mUri = Uri.fromFile(temp);
                     cropPhoto(mUri);
                 }
