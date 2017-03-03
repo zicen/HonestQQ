@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.lizhenquan.honestqq.model.ContactBean;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +22,7 @@ public class DBUtils {
         mContext = context;
     }
 
-    public static void UpdateContactDB(String username, List<String> newFriend) {
+    public static void UpdateContactDB(String username, List<ContactBean> newFriend) {
         if (mContext == null) {
             throw new RuntimeException("使用DBUtils之前必须在Application中初始化！");
         }
@@ -30,8 +32,10 @@ public class DBUtils {
         writableDatabase.delete("t_contact", "username=?", new String[]{username});
         ContentValues values = new ContentValues();
         values.put("username", username);
-        for (String s : newFriend) {
-            values.put("contact", s);
+        for (ContactBean contactBean : newFriend) {
+            values.put("contact", contactBean.username);
+            System.out.println("avatarUrl:"+contactBean.avatarUrl);
+            values.put("avatar", contactBean.avatarUrl);
             writableDatabase.insert("t_contact", null, values);
         }
 
@@ -41,20 +45,36 @@ public class DBUtils {
 
     }
 
-    public static List<String> getContacts(String username) {
+    public static List<ContactBean> getContacts(String username) {
         if (mContext == null) {
             throw new RuntimeException("使用DBUtils之前必须在Application中初始化！");
         }
         ContactSQLiteOpenHelper contactSQLiteOpenHelper = new ContactSQLiteOpenHelper(mContext);
-        List<String> contact = new ArrayList<>();
+        List<ContactBean> contact = new ArrayList<>();
         SQLiteDatabase readableDatabase = contactSQLiteOpenHelper.getReadableDatabase();
-        Cursor cursor = readableDatabase.query("t_contact", new String[]{"contact"}, "username=?", new String[]{username}, null, null, "contact");
+        Cursor cursor = readableDatabase.query("t_contact", new String[]{"contact","avatar"}, "username=?", new String[]{username}, null, null, "contact");
         while (cursor != null && cursor.moveToNext()) {
-            String string = cursor.getString(0);
-            contact.add(string);
+            String name = cursor.getString(0);
+            String avatar = cursor.getString(1);
+            contact.add(new ContactBean(name,avatar));
         }
         cursor.close();
         readableDatabase.close();
         return contact;
+    }
+
+    public static  String getAvatarUrl(String contact){
+        if (mContext == null) {
+            throw new RuntimeException("使用DBUtils之前必须在Application中初始化！");
+        }
+        ContactSQLiteOpenHelper contactSQLiteOpenHelper = new ContactSQLiteOpenHelper(mContext);
+        String avatarUrl =null;
+        SQLiteDatabase readableDatabase = contactSQLiteOpenHelper.getReadableDatabase();
+        Cursor cursor = readableDatabase.query("t_contact", new String[]{"avatar"}, "contact=?", new String[]{contact}, null, null, null);
+        while (cursor != null && cursor.moveToNext()) {
+            String avatar = cursor.getString(0);
+            avatarUrl = avatar;
+        }
+        return avatarUrl;
     }
 }

@@ -10,7 +10,6 @@
         >
 
         <LinearLayout
-            android:layout_below="@+id/rl_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#fff"
@@ -30,7 +29,7 @@
                 app:minetitle="我的博客"></com.example.lizhenquan.honestqq.wight.MineItemLayout>
         </LinearLayout>
 
-        <RelativeLayout
+       <!-- <RelativeLayout
             android:id="@+id/rl_header"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -60,7 +59,7 @@
                 android:text="username"
                 android:textColor="#fff"
                 android:textSize="16sp"/>
-        </RelativeLayout>
+        </RelativeLayout>-->
     </android.support.percent.PercentRelativeLayout>
 
 

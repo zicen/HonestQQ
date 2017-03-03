@@ -2,7 +2,11 @@ package com.example.lizhenquan.honestqq.view;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -22,9 +26,11 @@ import android.widget.TextView;
 import com.ashokvarma.bottomnavigation.BadgeItem;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.bumptech.glide.Glide;
 import com.example.lizhenquan.honestqq.R;
-import com.example.lizhenquan.honestqq.presenter.SettingPresentImpl;
-import com.example.lizhenquan.honestqq.presenter.SettingPresenter;
+import com.example.lizhenquan.honestqq.presenter.MainPresentImpl;
+import com.example.lizhenquan.honestqq.presenter.MainPresenter;
+import com.example.lizhenquan.honestqq.utils.ToastUtils;
 import com.example.lizhenquan.honestqq.view.fragment.BaseFragment;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
@@ -34,7 +40,14 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener, SettingView {
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
+public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener, MainView, View.OnClickListener {
     private static final String   TAG = "MainActivity";
     private              String[] arr = {"消息", "联系人", "动态"};
 
@@ -45,8 +58,11 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     private RelativeLayout      mHeaderView;
     private TextView            mTv_nicname;
     private BadgeItem           mBadgeItem;
-    private SettingPresenter    mSettingPresenter;
-
+    private MainPresenter       mMainPresenter;
+    private CircleImageView     mCircleImageView;
+    private String              mHeadUrl;
+    private Uri mUri;
+    private  String path = "/sdcard/HonestQQ/myHead/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +73,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         mNavigation = (NavigationView) findViewById(R.id.navigation);
         mHeaderView = (RelativeLayout) mNavigation.getHeaderView(0);
         mTv_nicname = (TextView) mHeaderView.findViewById(R.id.tv_nicname);
+        mCircleImageView = (CircleImageView) mHeaderView.findViewById(R.id.iv_head_icon);
+        mCircleImageView.setOnClickListener(this);
         mNavigation.setNavigationItemSelectedListener(this);
         mToolbar.setTitle("");
         String currentUser = EMClient.getInstance().getCurrentUser();
@@ -67,7 +85,18 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         initBottomNavigationBar();
         initFragment();
         EventBus.getDefault().register(this);
-        mSettingPresenter = new SettingPresentImpl(this);
+        mMainPresenter = new MainPresentImpl(this);
+        initCircleImageView();
+    }
+
+    private void initCircleImageView() {
+        mHeadUrl = mMainPresenter.getHeadUrl();
+        if (mHeadUrl != null) {
+            Glide.with(this).load(mHeadUrl).into(mCircleImageView);
+        } else {
+            mCircleImageView.setImageResource(R.mipmap.avatar3);
+        }
+
     }
 
     private void initFragment() {
@@ -130,6 +159,49 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         return true;
     }
 
+    private void showTypeDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog dialog = builder.create();
+        View view = View.inflate(this, R.layout.dialog_select_photo, null);
+        TextView tv_select_gallery = (TextView) view.findViewById(R.id.tv_select_gallery);
+        TextView tv_select_camera = (TextView) view.findViewById(R.id.tv_select_camera);
+        tv_select_gallery.setOnClickListener(new View.OnClickListener() {// 在相册中选取
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(Intent.ACTION_PICK, null);
+                intent1.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+                startActivityForResult(intent1, 1);
+                dialog.dismiss();
+            }
+        });
+        tv_select_camera.setOnClickListener(new View.OnClickListener() {// 调用照相机
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                intent2.putExtra(MediaStore.EXTRA_OUTPUT,
+                        Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "head.jpg")));
+                startActivityForResult(intent2, 2);// 采用ForResult打开
+                dialog.dismiss();
+            }
+        });
+        dialog.setView(view);
+        dialog.show();
+    }
+
+    public void cropPhoto(Uri uri) {
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setDataAndType(uri, "image/*");
+        intent.putExtra("crop", "true");
+        // aspectX aspectY 是宽高的比例
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        // outputX outputY 是裁剪图片宽高
+        intent.putExtra("outputX", 150);
+        intent.putExtra("outputY", 150);
+        intent.putExtra("return-data", true);
+        startActivityForResult(intent, 3);
+    }
+
     private void updateUnreadMsgCount() {
         int unreadMsgsCount = EMClient.getInstance().chatManager().getUnreadMsgsCount();
         if (unreadMsgsCount > 99) {
@@ -167,8 +239,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 Intent openCameraIntent = new Intent(this, CaptureActivity.class);
                 startActivityForResult(openCameraIntent, 0);
                 break;
-          case R.id.myqrcode:
-                startActivity(new Intent(this,QRCodeActivity.class));
+            case R.id.myqrcode:
+                startActivity(new Intent(this, QRCodeActivity.class));
                 break;
           /*    case R.id.take_pic:
 
@@ -275,7 +347,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                     @Override
                     public void onClick(View view) {
                         ad.dismiss();
-                        mSettingPresenter.logout();
+                        mMainPresenter.logout();
                     }
                 });
                 ad.show();
@@ -292,16 +364,70 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //处理扫描结果（在界面上显示）
-        if (requestCode == 0 && resultCode == RESULT_OK) {
-                Bundle bundle = data.getExtras();
-                String scanResult = bundle.getString("result");
-                showToast(scanResult);
-                mSettingPresenter.addFriend(scanResult);
+        switch (requestCode) {
+            case 0:
+                if (resultCode == RESULT_OK) {
+                    Bundle bundle = data.getExtras();
+                    String scanResult = bundle.getString("result");
+                    showToast(scanResult);
+                    mMainPresenter.addFriend(scanResult);
+                }
+                break;
+            case 1:
+                if (resultCode == RESULT_OK) {
+                    // 裁剪图片
+                    mUri = data.getData();
+                    cropPhoto(mUri);
+                }
+
+                break;
+            case 2:
+                if (resultCode == RESULT_OK) {
+                    // 裁剪图片
+                    File temp = new File(Environment.getExternalStorageDirectory() + "/HonestQQ/myHead/head.jpg");
+                    mUri = Uri.fromFile(temp);
+                    cropPhoto(mUri);
+                }
+
+                break;
+            case 3:
+                if (data != null) {
+                    Bundle extras = data.getExtras();
+                    Bitmap head = extras.getParcelable("data");
+                    if (head != null) {
+                        setPicToView(head);
+                        mCircleImageView.setImageBitmap(head);// 用ImageView显示出来
+                        //上传到AVCloud
+                        mMainPresenter.uploadImag();
+                    }
+                }
+                break;
         }
     }
-
-
-
+    private void setPicToView(Bitmap mBitmap) {
+        String sdStatus = Environment.getExternalStorageState();
+        if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { // 检测sd是否可用
+            return;
+        }
+        FileOutputStream b = null;
+        File file = new File(path);
+        file.mkdirs();// 创建文件夹
+        String fileName = path + "head.jpg";// 图片名字
+        try {
+            b = new FileOutputStream(fileName);
+            mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);// 把数据写入文件
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // 关闭流
+                b.flush();
+                b.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     @Override
     public void onLogout(boolean isSuccess, String msg) {
@@ -313,11 +439,25 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
     @Override
     public void onAddContact(String username, boolean isSuccess, String msg) {
-            if (isSuccess) {
-              Log.d("tag","发送好友请求成功！");
-            } else {
-                Log.d("tag","发送好友请求失败！");
-            }
+        if (isSuccess) {
+            Log.d("tag", "发送好友请求成功！");
+        } else {
+            Log.d("tag", "发送好友请求失败！");
+        }
 
+    }
+
+    @Override
+    public void onUploadImag(boolean isSuccess, String msg) {
+        if (isSuccess) {
+            ToastUtils.showToast(this, "更新头像成功！");
+        } else {
+            ToastUtils.showToast(this,"更新头像失败！"+msg);
+        }
+    }
+    //头像的点击事件
+    @Override
+    public void onClick(View view) {
+        showTypeDialog();
     }
 }

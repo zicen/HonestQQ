@@ -1,6 +1,7 @@
 package com.example.lizhenquan.honestqq.view;
 
 import com.avos.avoscloud.AVUser;
+import com.example.lizhenquan.honestqq.model.ContactBean;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  */
 
 public interface AddFriendView {
-    void onSearchResult(List<AVUser> list, List<String> contactsList, boolean isSuccess, String msg);
+    void onSearchResult(List<AVUser> list, List<ContactBean> contactsList, boolean isSuccess, String msg);
 
     void onAddContact(String username, boolean isSuccess, String message);
 }

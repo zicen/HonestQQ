@@ -73,7 +73,6 @@ public class ConversationFragment extends BaseFragment implements ConversationVi
     }
     @Override
     public void onInitConversation(List<EMConversation> eMConversationList) {
-
         mConversationAdapter = new ConversationAdapter(eMConversationList,this);
         mRecyclerView.setAdapter(mConversationAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());

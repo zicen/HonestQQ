@@ -11,8 +11,10 @@ import android.widget.TextView;
 
 import com.avos.avoscloud.AVUser;
 import com.example.lizhenquan.honestqq.R;
+import com.example.lizhenquan.honestqq.model.ContactBean;
 import com.example.lizhenquan.honestqq.utils.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,13 +23,15 @@ import java.util.List;
  */
 
 public class AddFriendAdapter extends RecyclerView.Adapter<AddFriendAdapter.AddFriendViewHolder> implements View.OnClickListener {
-    private  List<String> mContactList;
+    private  List<ContactBean> mContactList;
+    private List<String> NameList = new ArrayList<>();
+
     private Context mContext;
     private    List<AVUser> mData;
     private  String TAG = "AddFriendAdapter";
 
 
-    public AddFriendAdapter(Context context, List<AVUser> list, List<String> contactsList) {
+    public AddFriendAdapter(Context context, List<AVUser> list, List<ContactBean> contactsList) {
         this.mContext = context;
         this.mData = list;
         this.mContactList = contactsList;
@@ -38,6 +42,10 @@ public class AddFriendAdapter extends RecyclerView.Adapter<AddFriendAdapter.AddF
         View view = LayoutInflater.from(mContext).inflate(R.layout.add_friend_item, parent,false);
         AddFriendAdapter.AddFriendViewHolder holder = new AddFriendAdapter.AddFriendViewHolder(view);
         view.setOnClickListener(this);
+        for (int i = 0; i < mContactList.size(); i++) {
+            NameList.add(mContactList.get(i).username);
+        }
+
         return holder;
     }
 
@@ -49,7 +57,7 @@ public class AddFriendAdapter extends RecyclerView.Adapter<AddFriendAdapter.AddF
         holder.mTv_time.setText(StringUtils.getDateString(createdAt));
         holder.mTvUsername.setText(username);
 
-        if (mContactList.contains(username)) {
+        if (NameList.contains(username)) {
             holder.mBtn_add.setEnabled(false);
             holder.mBtn_add.setText("已添加好友");
         } else {

@@ -18,12 +18,11 @@ public class ContactSQLiteOpenHelper extends SQLiteOpenHelper {
     }
     public ContactSQLiteOpenHelper(Context context){
         super(context, CONTACT_DB,null, VERSION);
-
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table t_contact(_id integer primary key,username varchar(20),contact varchar(20))");
+        db.execSQL("create table t_contact(_id integer primary key,username varchar(20),contact varchar(20),avatar varchar(100))");
     }
 
     @Override

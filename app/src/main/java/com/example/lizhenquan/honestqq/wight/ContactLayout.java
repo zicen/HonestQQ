@@ -3,7 +3,6 @@ package com.example.lizhenquan.honestqq.wight;
 import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -30,6 +29,7 @@ public class ContactLayout extends RelativeLayout {
 
     public ContactLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         this(context, attrs);
+
     }
 
     public ContactLayout(Context context, AttributeSet attrs) {
@@ -69,8 +69,10 @@ public class ContactLayout extends RelativeLayout {
         /**
          * 设置适配器之前不要忘了设置布局管理器
          */
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        mRecyclerView.setLayoutManager(new MyLinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(adapter);
     }
+
 
 }

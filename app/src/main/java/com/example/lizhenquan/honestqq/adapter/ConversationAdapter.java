@@ -8,7 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.lizhenquan.honestqq.R;
+import com.example.lizhenquan.honestqq.db.DBUtils;
 import com.example.lizhenquan.honestqq.utils.Utils;
 import com.example.lizhenquan.honestqq.view.fragment.ConversationFragment;
 import com.example.lizhenquan.honestqq.wight.SlidingButtonView;
@@ -20,6 +22,8 @@ import com.hyphenate.util.DateUtils;
 
 import java.util.Date;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by lizhenquan on 2017/1/24.
@@ -35,6 +39,8 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         mContext = context.getContext();
         mIDeleteBtnClickListener = (IonSlidingViewClickListener) context;
     }
+
+
 
     @Override
     public ConversationViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -58,7 +64,12 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
                 EMTextMessageBody emTextMessageBody = (EMTextMessageBody) body;
                 String message = emTextMessageBody.getMessage();
                 holder.mTvMsg.setText(message);
+            } else {
+                holder.mTvMsg.setText("");
             }
+        } else {
+            holder.mTvTime.setText("");
+            holder.mTvMsg.setText("");
         }
 
         int unreadMsgCount = emConversation.getUnreadMsgCount();
@@ -94,6 +105,13 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
             }
         });
 
+        String avatarUrl = DBUtils.getAvatarUrl(userName);
+        if (avatarUrl != null) {
+            Glide.with(mContext).load(avatarUrl).into(holder.mCircleImageView);
+        } else {
+            holder.mCircleImageView.setImageResource(R.mipmap.avatar3);
+        }
+
     }
     @Override
     public int getItemCount() {
@@ -107,6 +125,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         private final TextView mTvUsername;
         private final ViewGroup layout_content;
         private final TextView btn_Delete;
+        private final CircleImageView mCircleImageView;
 
         public ConversationViewHolder(View itemView) {
             super(itemView);
@@ -116,7 +135,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
             mTvMsg = (TextView) itemView.findViewById(R.id.tv_msg);
              btn_Delete = (TextView) itemView.findViewById(R.id.tv_delete);
             layout_content = (ViewGroup) itemView.findViewById(R.id.layout_content);
-
+            mCircleImageView = (CircleImageView) itemView.findViewById(R.id.iv_avatar);
             ((SlidingButtonView) itemView).setSlidingButtonListener(ConversationAdapter.this);
 
         }

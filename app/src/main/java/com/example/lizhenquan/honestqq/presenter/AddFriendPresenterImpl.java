@@ -5,6 +5,7 @@ import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.FindCallback;
 import com.example.lizhenquan.honestqq.db.DBUtils;
+import com.example.lizhenquan.honestqq.model.ContactBean;
 import com.example.lizhenquan.honestqq.utils.ThreadUtils;
 import com.example.lizhenquan.honestqq.view.AddFriendView;
 import com.hyphenate.chat.EMClient;
@@ -25,7 +26,7 @@ public class AddFriendPresenterImpl implements AddFriendPresenter {
 
     @Override
     public void searchFriend(String keyword) {
-        final List<String> contactsList = DBUtils.getContacts(EMClient.getInstance().getCurrentUser());
+        final List<ContactBean> contactsList = DBUtils.getContacts(EMClient.getInstance().getCurrentUser());
         /**
          * 到AVCloud上面查询好友
          */

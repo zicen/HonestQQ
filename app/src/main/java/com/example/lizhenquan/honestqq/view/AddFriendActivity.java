@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import com.avos.avoscloud.AVUser;
 import com.example.lizhenquan.honestqq.R;
 import com.example.lizhenquan.honestqq.adapter.AddFriendAdapter;
+import com.example.lizhenquan.honestqq.model.ContactBean;
 import com.example.lizhenquan.honestqq.presenter.AddFriendPresenter;
 import com.example.lizhenquan.honestqq.presenter.AddFriendPresenterImpl;
 
@@ -89,7 +90,7 @@ public class AddFriendActivity extends BaseActivity implements AddFriendView, Ad
     }
 
     @Override
-    public void onSearchResult(List<AVUser> list, List<String> contactsList, boolean isSuccess, String msg) {
+    public void onSearchResult(List<AVUser> list, List<ContactBean> contactsList, boolean isSuccess, String msg) {
         hideDialog();
         //隐藏输入法程序
         mInputMethodManager.hideSoftInputFromInputMethod(mSearchView.getWindowToken(), 0);

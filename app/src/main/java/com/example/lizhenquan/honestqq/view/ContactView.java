@@ -1,5 +1,7 @@
 package com.example.lizhenquan.honestqq.view;
 
+import com.example.lizhenquan.honestqq.model.ContactBean;
+
 import java.util.List;
 
 /**
@@ -9,7 +11,7 @@ import java.util.List;
 public interface ContactView {
 
 
-    void oninitContacts(List<String> contactsList);
+    void oninitContacts(List<ContactBean> contactsList);
 
     void onUpdateContacts(boolean isSuccess, List<String> contactsList, String msg);
 
