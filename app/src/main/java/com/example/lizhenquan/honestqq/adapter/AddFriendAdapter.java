@@ -26,7 +26,6 @@ public class AddFriendAdapter extends RecyclerView.Adapter<AddFriendAdapter.AddF
     private  List<ContactBean> mContactList;
     private List<String> NameList = new ArrayList<>();
 
-
     private Context mContext;
     private    List<AVUser> mData;
     private  String TAG = "AddFriendAdapter";
