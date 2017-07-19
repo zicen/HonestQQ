@@ -5,7 +5,7 @@ package com.example.lizhenquan.honestqq.presenter;
  */
 
 public interface LoginPresenter {
-    void login(String username,String pwd);
+    void login(String username, String pwd);
 
     void regist(String phone, String phonePassword);
 }

@@ -1,13 +1,11 @@
 package com.example.lizhenquan.honestqq.adapter;
 
 import android.content.Context;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.OvershootInterpolator;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -47,15 +45,11 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
     @Override
     public ConversationViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item, parent, false);
-        view.setScaleX(.6F);
-        view.setScaleY(.6f);
-        ViewCompat.animate(view).scaleX(1).scaleY(1).setDuration(300).setInterpolator(new OvershootInterpolator())
-                .start();
         ConversationViewHolder conversationViewHolder = new ConversationViewHolder(view);
         return conversationViewHolder;
     }
 
-    @Override
+   /* @Override
     public void onViewAttachedToWindow(ConversationViewHolder holder) {
         //设置条目加载动画
         holder.mItemView.setScaleX(.6F);
@@ -63,7 +57,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         ViewCompat.animate(holder.mItemView).scaleX(1).scaleY(1).setDuration(300).setInterpolator(new OvershootInterpolator())
                 .start();
         super.onViewAttachedToWindow(holder);
-    }
+    }*/
 
     @Override
     public void onBindViewHolder(final ConversationViewHolder holder, final int position) {
@@ -206,7 +200,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
     }
 
     public interface IonSlidingViewClickListener {
-        void onItemClick(View view,int position,EMConversation emConversation);
-        void onDeleteBtnCilck(View view,int position,EMConversation emConversation);
+        void onItemClick(View view, int position, EMConversation emConversation);
+        void onDeleteBtnCilck(View view, int position, EMConversation emConversation);
     }
 }

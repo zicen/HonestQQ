@@ -1,12 +1,10 @@
 package com.example.lizhenquan.honestqq.adapter;
 
 import android.content.Context;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.OvershootInterpolator;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -55,23 +53,19 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.Contatct
         return contatctViewHolder;
     }
 
-    @Override
+   /* @Override
     public void onViewAttachedToWindow(ContatctViewHolder holder) {
         //设置条目加载动画
         holder.itemView.setScaleX(.6F);
         holder.itemView.setScaleY(.6f);
-        ViewCompat.animate(holder.itemView).scaleX(1).scaleY(1).setDuration(1000).setInterpolator(new OvershootInterpolator())
+        ViewCompat.animate(holder.itemView).scaleX(1).scaleY(1).setDuration(300).setInterpolator(new OvershootInterpolator())
                 .start();
         super.onViewAttachedToWindow(holder);
-    }
+    }*/
 
     @Override
     public void onBindViewHolder(final ContatctViewHolder holder, final int position) {
- /*       //设置条目加载动画
-        holder.itemView.setScaleX(.6F);
-        holder.itemView.setScaleY(.6f);
-        ViewCompat.animate(holder.itemView).scaleX(1).scaleY(1).setDuration(1000).setInterpolator(new OvershootInterpolator())
-                .start();*/
+
 
         final String contact = contactList.get(position).username;
         holder.mTvusername.setText(contact);

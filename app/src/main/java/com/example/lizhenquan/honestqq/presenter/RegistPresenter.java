@@ -5,5 +5,5 @@ package com.example.lizhenquan.honestqq.presenter;
  */
 
 public interface RegistPresenter {
-    void regist(String username,String pwd);
+    void regist(String username, String pwd);
 }

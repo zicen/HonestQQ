@@ -21,8 +21,8 @@ import com.example.lizhenquan.honestqq.db.County;
 import com.example.lizhenquan.honestqq.db.Province;
 import com.example.lizhenquan.honestqq.utils.HttpUtil;
 import com.example.lizhenquan.honestqq.utils.Utility;
-import com.example.lizhenquan.honestqq.view.CoolWeatherActivity;
-import com.example.lizhenquan.honestqq.view.WeatherActivity;
+import com.example.lizhenquan.honestqq.view.activity.CoolWeatherActivity;
+import com.example.lizhenquan.honestqq.view.activity.WeatherActivity;
 
 import org.litepal.crud.DataSupport;
 

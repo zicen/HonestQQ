@@ -13,7 +13,7 @@ import com.example.lizhenquan.honestqq.R;
 import com.example.lizhenquan.honestqq.adapter.ConversationAdapter;
 import com.example.lizhenquan.honestqq.presenter.ConversationPresenter;
 import com.example.lizhenquan.honestqq.presenter.ConversationPresenterImpl;
-import com.example.lizhenquan.honestqq.view.ChatActivityEaseUI;
+import com.example.lizhenquan.honestqq.view.activity.ChatActivityEaseUI;
 import com.example.lizhenquan.honestqq.view.ConversationView;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;

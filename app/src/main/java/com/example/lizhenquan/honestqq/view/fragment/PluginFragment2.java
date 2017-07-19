@@ -11,8 +11,8 @@ import android.widget.ListView;
 import com.example.lizhenquan.honestqq.R;
 import com.example.lizhenquan.honestqq.adapter.PluginListAdapter;
 import com.example.lizhenquan.honestqq.utils.Constant;
-import com.example.lizhenquan.honestqq.view.CoolWeatherActivity;
-import com.example.lizhenquan.honestqq.view.PluginItemActivity;
+import com.example.lizhenquan.honestqq.view.activity.CoolWeatherActivity;
+import com.example.lizhenquan.honestqq.view.activity.PluginItemActivity;
 import com.example.lizhenquan.honestqq.wight.MyListView;
 
 import static com.example.lizhenquan.honestqq.R.id.map;

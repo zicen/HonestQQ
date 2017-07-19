@@ -44,9 +44,10 @@ public class ConversationPresenterImpl implements ConversationPresenter {
                 @Override
                 public int compare(EMConversation emConversation, EMConversation emConversation1) {
                     EMMessage lastMessage = emConversation.getLastMessage();
-                    if (emConversation != null && lastMessage != null) {
+                    EMMessage lastMessage1 = emConversation1.getLastMessage();
+                    if (emConversation != null && lastMessage != null && lastMessage1!=null) {
                         long msgTime = lastMessage.getMsgTime();
-                        long msgTime1 = lastMessage.getMsgTime();
+                        long msgTime1 = lastMessage1.getMsgTime();
                         int num = (int) (msgTime1 - msgTime);
                         return num == 0 ? (int) msgTime : num;
                     }

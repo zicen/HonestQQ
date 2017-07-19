@@ -27,7 +27,7 @@
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/iicon"
+        android:icon="@mipmap/backicon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -36,6 +36,9 @@
         <meta-data
             android:name="EASEMOB_APPKEY"
             android:value="1103161228178859#honestqq"/>
+        <meta-data
+            android:name="QBSDKAppKey"
+            android:value="sQdpBQ/WFmpMcfx15P6WABSA"/>
         <!-- 声明SDK所需的service SDK核心功能 -->
         <service
             android:name="com.hyphenate.chat.EMChatService"
@@ -59,11 +62,11 @@
         </receiver>
 
         <activity
-            android:name=".view.MainActivity"
+            android:name=".view.activity.MainActivity"
             android:launchMode="singleTask">
         </activity>
         <activity
-            android:name=".view.SplashActivity"
+            android:name=".view.activity.SplashActivity"
             android:theme="@style/FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -72,16 +75,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.LoginActivity"
+            android:name=".view.activity.LoginActivity"
             android:launchMode="singleTask">
         </activity>
-        <activity android:name=".view.RegistActivity">
+        <activity android:name=".view.activity.RegistActivity">
         </activity>
-        <activity android:name=".view.CoolWeatherActivity">
+        <activity android:name=".view.activity.CoolWeatherActivity">
         </activity>
-        <activity android:name=".view.WeatherActivity">
+        <activity android:name=".view.activity.WeatherActivity">
         </activity>
-        <activity android:name=".view.ChatActivityEaseUI">
+        <activity android:name=".view.activity.ChatActivityEaseUI">
         </activity>
         <activity android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity"/>
         <activity android:name="com.hyphenate.easeui.ui.EaseBaiduMapActivity"/>
@@ -92,15 +95,15 @@
             android:exported="true">
         </service>
 
-        <activity android:name=".view.SettingActivity">
+        <activity android:name=".view.activity.SettingActivity">
         </activity>
-        <activity android:name=".view.AddFriendActivity">
+        <activity android:name=".view.activity.AddFriendActivity">
         </activity>
-        <activity android:name=".view.ChatActivity">
+        <activity android:name=".view.activity.ChatActivity">
         </activity>
-        <activity android:name=".view.PluginItemActivity">
+        <activity android:name=".view.activity.PluginItemActivity">
         </activity>
-        <activity android:name=".view.FileActivity">
+        <activity android:name=".view.activity.FileActivity">
         </activity>
 
         <!-- 百度地图所需的service -->
@@ -111,7 +114,7 @@
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="3ecea51f560650b1ed8a4b99808f52e8"/>
+            android:value="rP5shOz2gwdw4IF5tpqbdpFydTgFegoa"/>
 
         <!-- 短信验证登录 -->
         <activity
@@ -132,7 +135,11 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
-        <activity android:name=".view.QRCodeActivity">
+        <activity android:name=".view.activity.QRCodeActivity">
+        </activity>
+        <activity android:name=".view.activity.NewsDetailActivity">
+        </activity>
+        <activity android:name=".view.activity.ResetPwdActivity">
         </activity>
     </application>
 

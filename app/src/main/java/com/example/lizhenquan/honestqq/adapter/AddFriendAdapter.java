@@ -40,7 +40,7 @@ public class AddFriendAdapter extends RecyclerView.Adapter<AddFriendAdapter.AddF
     @Override
     public AddFriendViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.add_friend_item, parent,false);
-        AddFriendAdapter.AddFriendViewHolder holder = new AddFriendAdapter.AddFriendViewHolder(view);
+        AddFriendViewHolder holder = new AddFriendViewHolder(view);
         view.setOnClickListener(this);
         for (int i = 0; i < mContactList.size(); i++) {
             NameList.add(mContactList.get(i).username);

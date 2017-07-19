@@ -5,6 +5,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
@@ -17,10 +18,10 @@ import com.example.lizhenquan.honestqq.db.DBUtils;
 import com.example.lizhenquan.honestqq.event.ContactEvent;
 import com.example.lizhenquan.honestqq.utils.ThreadUtils;
 import com.example.lizhenquan.honestqq.utils.ToastUtils;
-import com.example.lizhenquan.honestqq.view.BaseActivity;
-import com.example.lizhenquan.honestqq.view.ChatActivityEaseUI;
-import com.example.lizhenquan.honestqq.view.LoginActivity;
-import com.example.lizhenquan.honestqq.view.MainActivity;
+import com.example.lizhenquan.honestqq.view.activity.BaseActivity;
+import com.example.lizhenquan.honestqq.view.activity.ChatActivityEaseUI;
+import com.example.lizhenquan.honestqq.view.activity.LoginActivity;
+import com.example.lizhenquan.honestqq.view.activity.MainActivity;
 import com.hyphenate.EMConnectionListener;
 import com.hyphenate.EMContactListener;
 import com.hyphenate.EMError;
@@ -55,6 +56,7 @@ public class MyApplication extends android.support.multidex.MultiDexApplication 
     private int mDuanSound;
     private int mYuluSound;
     private List<BaseActivity> mBaseActivities ;
+    public static    Context context;
    /* public static RefWatcher getRefWatcher(Context context) {
         MyApplication application = (MyApplication) context.getApplicationContext();
         return application.refWatcher;
@@ -65,6 +67,7 @@ public class MyApplication extends android.support.multidex.MultiDexApplication 
     @Override
     public void onCreate() {
         super.onCreate();
+        context = this.getApplicationContext();
        // refWatcher = LeakCanary.install(this);
      //   LeakCanary.install(this);
         mActivityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
@@ -72,13 +75,13 @@ public class MyApplication extends android.support.multidex.MultiDexApplication 
         initHuanXin();
         initLeanCloud();
         initLitepal();
-
         initDBUtils();
         initSoundPool();
         initEaseUI();
         initMobSms();
         mBaseActivities = new ArrayList<>();
     }
+
 
     private void initMobSms() {
         SMSSDK.initSDK(this, "15d5d9bc15762", "6e9211264302886949713acc7be1eef3");

@@ -55,11 +55,14 @@ public class ContactPresenterImpl implements ContactPresenter {
         mContactView.oninitContacts(contactBeanList);
         //2.获取服务器上的联系人数据，保存到缓存
         updateFromServer(currentUser);
-
-
-
     }
 
+    /**
+     * 在这里遇到一个BUG，就是当我传入的username是电话号码的时候，返回的ContactBean是一个值为空的对象
+     * 但是在leanCloud的后台是可以看到这个Username的对象数据的
+     * @param username
+     * @return
+     */
     private ContactBean  queryAvatar(final String username) {
         mUserQuery.whereEqualTo("username", username);
          final ContactBean contactBean = new ContactBean();
@@ -81,8 +84,9 @@ public class ContactPresenterImpl implements ContactPresenter {
                     }
                 } catch (AVException e) {
                     e.printStackTrace();
+                    System.out.println("报错了"+e.toString());
                 }
-
+        contactBean.username = username;
         return contactBean;
     }
 
@@ -152,6 +156,10 @@ public class ContactPresenterImpl implements ContactPresenter {
                 try {
                     final List<String> allContactsFromServer =   EMClient.getInstance().contactManager().getAllContactsFromServer();
                     //获取成功，将网络上的最新数据保存到缓存
+                    for (int i = 0; i < allContactsFromServer.size(); i++) {
+                        String s = allContactsFromServer.get(i);
+                        System.out.println("name:"+s);
+                    }
                     contactBeanList2.clear();
                     for (int i = 0; i < allContactsFromServer.size(); i++) {
                         String username = allContactsFromServer.get(i);

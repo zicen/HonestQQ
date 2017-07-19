@@ -7,19 +7,21 @@
     android:background="@mipmap/login_bk"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.lizhenquan.honestqq.view.LoginActivity">
+    tools:context="com.example.lizhenquan.honestqq.view.activity.LoginActivity">
     <ImageView
         android:layout_gravity="center_horizontal"
         android:layout_width="60dp"
         android:layout_marginTop="60dp"
         android:layout_marginBottom="30dp"
-        android:src="@mipmap/iicon5"
+        android:src="@mipmap/iiicon"
         android:layout_height="60dp"/>
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:id="@+id/til_username"
         android:layout_height="wrap_content">
         <EditText
+            android:background="@drawable/et_back"
+            android:layout_margin="10dp"
             android:inputType="text"
             android:imeOptions="actionNext"
             android:layout_width="match_parent"
@@ -33,6 +35,8 @@
     android:id="@+id/til_pwd"
     android:layout_height="wrap_content">
     <EditText
+        android:background="@drawable/et_back"
+        android:layout_margin="10dp"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
         android:layout_width="match_parent"

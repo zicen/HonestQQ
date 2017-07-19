@@ -9,5 +9,7 @@
 <item android:id="@+id/menu_richeng" android:icon="@mipmap/richeng" android:title="我的日程"></item>
 <item android:id="@+id/menu_shezhi" android:icon="@mipmap/shezhi" android:title="设置"></item>
 <item android:id="@+id/menu_yejian" android:icon="@mipmap/yejianmoshi" android:title="夜间模式"></item>-->
-<item android:id="@+id/menu_logout" android:icon="@mipmap/exit" android:title="退出登录"></item>
+    <item android:id="@+id/menu_weather" android:icon="@mipmap/weather" android:title="查询天气"></item>
+    <item android:id="@+id/menu_resetpwd" android:icon="@mipmap/reset_pwd" android:title="重置密码"></item>
+    <item android:id="@+id/menu_logout" android:icon="@mipmap/exit" android:title="退出登录"></item>
 </menu>

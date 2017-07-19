@@ -97,15 +97,17 @@ public class MainPresentImpl implements MainPresenter {
                 public void done(AVException e) {
                     final String url = avFile.getUrl();
                     if (url != null && !url.equals("")) {
-                        mCurrentUser.put(Constant.PORTRAITURL, url);
-                        mCurrentUser.put(Constant.HEADOBJECTID, avFile.getObjectId());
-                        mCurrentUser.saveInBackground(new SaveCallback() {
-                            @Override
-                            public void done(AVException e) {
-                                //TODO
-                                mMainView.onUploadImag(true,null);
-                            }
-                        });
+                        if (mCurrentUser!=null) {
+                            mCurrentUser.put(Constant.PORTRAITURL, url);
+                            mCurrentUser.put(Constant.HEADOBJECTID, avFile.getObjectId());
+                            mCurrentUser.saveInBackground(new SaveCallback() {
+                                @Override
+                                public void done(AVException e) {
+                                    //TODO
+                                    mMainView.onUploadImag(true, null);
+                                }
+                            });
+                        }
                     }
                 }
             });
@@ -121,7 +123,11 @@ public class MainPresentImpl implements MainPresenter {
      */
     @Override
     public String getHeadUrl() {
-        String portraitUrl = (String) mCurrentUser.get(Constant.PORTRAITURL);
-        return  portraitUrl;
+        if (mCurrentUser != null) {
+            String portraitUrl = (String) mCurrentUser.get(Constant.PORTRAITURL);
+            return  portraitUrl;
+        }
+
+        return  "";
     }
 }

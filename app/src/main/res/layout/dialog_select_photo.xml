@@ -25,4 +25,5 @@
         android:background="@drawable/shape_kuang"
         android:text="拍摄照片"/>
 
+
 </LinearLayout>
