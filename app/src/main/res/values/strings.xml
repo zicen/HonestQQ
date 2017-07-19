@@ -4,4 +4,10 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="load_error">加载失败</string>
+
+
+    <string name="program_finish">End of program</string>
+    <string name="program_finish_msg">Are you sure you want to quit?</string>
+    <string name="common_btn_ok">Ok</string>
+    <string name="common_btn_cancel">Cancel</string>
 </resources>

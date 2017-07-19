@@ -153,8 +153,8 @@ public class LoginActivity extends BaseActivity implements LoginView, TextView.O
             return;
         }
 
-        String username = mEtUsername.getText().toString();
-        String pwd = mEtPwd.getText().toString();
+        String username = mEtUsername.getText().toString().trim();
+        String pwd = mEtPwd.getText().toString().trim();
         if (!StringUtils.checkUsername(username)) {
             //用户名不合法
             //1、显示错误信息

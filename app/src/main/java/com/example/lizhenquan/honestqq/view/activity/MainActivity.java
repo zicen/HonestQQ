@@ -1,6 +1,7 @@
 package com.example.lizhenquan.honestqq.view.activity;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -9,9 +10,13 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatDialog;
 import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -467,5 +472,35 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     @Override
     public void onClick(View view) {
         showTypeDialog();
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            android.support.v7.app.AlertDialog.Builder alertdlg = new android.support.v7.app.AlertDialog.Builder(MainActivity.this);
+            alertdlg.setTitle(getString(R.string.program_finish))
+                    .setMessage(getString(R.string.program_finish_msg))
+                    .setPositiveButton(getString(R.string.common_btn_ok), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            moveTaskToBack(true);
+                            ActivityCompat.finishAffinity(MainActivity.this);
+                            System.runFinalizersOnExit(true);
+                            System.exit(0);
+                        }
+                    }).setNegativeButton(getString(R.string.common_btn_cancel), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+
+            AppCompatDialog alert = alertdlg.create();
+            alert.show();
+        }
     }
 }
