@@ -55,21 +55,23 @@ import java.io.IOException;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener, MainView, View.OnClickListener {
-    private static final String   TAG = "MainActivity";
-    private              String[] arr = {"消息", "联系人", "圈子"};
+    private static final String TAG = "MainActivity";
+    private static final int TAKE_PHOTO = 100;
+    private String[] arr = {"消息", "联系人", "圈子"};
 
-    private Toolbar             mToolbar;
+    private Toolbar mToolbar;
     private BottomNavigationBar mBottom_navigation_bar;
-    private TextView            mTv_title;
-    private NavigationView      mNavigation;
-    private RelativeLayout      mHeaderView;
-    private TextView            mTv_nicname;
-    private BadgeItem           mBadgeItem;
-    private MainPresenter       mMainPresenter;
-    private CircleImageView     mCircleImageView;
-    private String              mHeadUrl;
+    private TextView mTv_title;
+    private NavigationView mNavigation;
+    private RelativeLayout mHeaderView;
+    private TextView mTv_nicname;
+    private BadgeItem mBadgeItem;
+    private MainPresenter mMainPresenter;
+    private CircleImageView mCircleImageView;
+    private String mHeadUrl;
     private Uri mUri;
-    private  String path = "/sdcard/HonestQQ/myHead/";
+    private String path = "/sdcard/HonestQQ/myHead/";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -233,10 +235,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {//更多菜单选项
 
-        /*    case R.id.create_group:
-                showToast("create_group");
-
-                break;*/
             case R.id.add_friend:
                 startActivity(AddFriendActivity.class, false);
 
@@ -249,10 +247,12 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             case R.id.myqrcode:
                 startActivity(new Intent(this, QRCodeActivity.class));
                 break;
-          /*    case R.id.take_pic:
-
-
-                break;*/
+            case R.id.take_pic:
+                Intent intent2 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                intent2.putExtra(MediaStore.EXTRA_OUTPUT,
+                        Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "photo.jpg")));
+                startActivityForResult(intent2, TAKE_PHOTO);// 采用ForResult打开
+                break;
         }
         return true;
     }
@@ -322,16 +322,20 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             case R.id.menu_xiangche:
                 showToast("等待开发中。。。");
                 break;
-            case R.id.menu_wenjian:
-                Intent intent = new Intent(this, FileActivity.class);
-                startActivity(intent);
-                break;
             case R.id.menu_richeng:
                 showToast("等待开发中。。。");
                 break;
             case R.id.menu_shezhi:
                 startActivity(SettingActivity.class, false);
                 break;*/
+            case R.id.menu_wenjian:
+               /* Intent intent = new Intent(this, FileActivity.class);
+                startActivity(intent);*/
+
+                Intent intent = new Intent(this, MyImgActivity.class);
+                startActivity(intent);
+                break;
+
             case R.id.menu_resetpwd:
                 startActivity(new Intent(MainActivity.this, ResetPwdActivity.class));
                 break;
@@ -364,7 +368,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
                 break;
             case R.id.menu_weather:
-                startActivity(new Intent(this,CoolWeatherActivity.class));
+                startActivity(new Intent(this, CoolWeatherActivity.class));
                 break;
             default:
                 break;
@@ -415,8 +419,21 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                     }
                 }
                 break;
+
+            case TAKE_PHOTO:
+                if (resultCode == RESULT_OK) {
+                    File temp = new File(Environment.getExternalStorageDirectory() + "/photo.jpg");
+                    String attachFilePath = temp.getAbsolutePath();
+                    Log.e(TAG, "attachFilePath:" + attachFilePath);
+                    //上传照片
+                    //上传到AVCloud
+                    mMainPresenter.uploadPhoto(attachFilePath);
+                }
+                break;
+
         }
     }
+
     private void setPicToView(Bitmap mBitmap) {
         String sdStatus = Environment.getExternalStorageState();
         if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { // 检测sd是否可用
@@ -465,9 +482,19 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         if (isSuccess) {
             ToastUtils.showToast(this, "更新头像成功！");
         } else {
-            ToastUtils.showToast(this,"更新头像失败！"+msg);
+            ToastUtils.showToast(this, "更新头像失败！" + msg);
         }
     }
+
+    @Override
+    public void onUploadPhoto(boolean isSuccess, String msg) {
+        if (isSuccess) {
+            ToastUtils.showToast(this, "上传图片成功！");
+        } else {
+            ToastUtils.showToast(this, "上传图片失败！" + msg);
+        }
+    }
+
     //头像的点击事件
     @Override
     public void onClick(View view) {

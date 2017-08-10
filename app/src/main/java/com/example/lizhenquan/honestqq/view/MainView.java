@@ -10,4 +10,8 @@ public interface MainView {
     void onAddContact(String username, boolean isSuccess, String msg);
 
     void onUploadImag(boolean isSuccess, String msg);
+
+    void onUploadPhoto(boolean isSuccess, String msg);
+
+
 }

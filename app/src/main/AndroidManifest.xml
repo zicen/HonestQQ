@@ -141,6 +141,8 @@
         </activity>
         <activity android:name=".view.activity.ResetPwdActivity">
         </activity>
+        <activity android:name=".view.activity.MyImgActivity">
+        </activity>
     </application>
 
 </manifest>

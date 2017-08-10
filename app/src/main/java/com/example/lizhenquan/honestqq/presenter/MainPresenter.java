@@ -8,5 +8,6 @@ public interface MainPresenter {
     void logout();
     void addFriend(String username);
     void uploadImag();
+    void uploadPhoto(String filepath);
     String  getHeadUrl();
 }

@@ -26,4 +26,15 @@ public class Constant {
      */
     public static final String PORTRAITURL      = "portraitUrl";
 
+    /**
+     * 上传的照片的数据库class
+     */
+    public static final String UPLOADIMG      = "UploadImg";
+
+    public static final String LOCALFILE      = "localfile";
+    public static final String LOCALFILEIMG      = "localfile.jpg";
+
+
+
+
 }

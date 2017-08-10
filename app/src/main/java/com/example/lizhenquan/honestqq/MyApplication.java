@@ -14,6 +14,7 @@ import android.media.SoundPool;
 import android.util.Log;
 
 import com.avos.avoscloud.AVOSCloud;
+import com.avos.avoscloud.AVUser;
 import com.example.lizhenquan.honestqq.db.DBUtils;
 import com.example.lizhenquan.honestqq.event.ContactEvent;
 import com.example.lizhenquan.honestqq.utils.ThreadUtils;
@@ -55,8 +56,9 @@ public class MyApplication extends android.support.multidex.MultiDexApplication 
     private SoundPool mSoundPool;
     private int mDuanSound;
     private int mYuluSound;
-    private List<BaseActivity> mBaseActivities ;
-    public static    Context context;
+    private List<BaseActivity> mBaseActivities;
+    public static Context context;
+    public static AVUser mCurrentUser;
    /* public static RefWatcher getRefWatcher(Context context) {
         MyApplication application = (MyApplication) context.getApplicationContext();
         return application.refWatcher;
@@ -68,8 +70,8 @@ public class MyApplication extends android.support.multidex.MultiDexApplication 
     public void onCreate() {
         super.onCreate();
         context = this.getApplicationContext();
-       // refWatcher = LeakCanary.install(this);
-     //   LeakCanary.install(this);
+        // refWatcher = LeakCanary.install(this);
+        //   LeakCanary.install(this);
         mActivityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
         mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         initHuanXin();
@@ -80,8 +82,8 @@ public class MyApplication extends android.support.multidex.MultiDexApplication 
         initEaseUI();
         initMobSms();
         mBaseActivities = new ArrayList<>();
+        mCurrentUser = AVUser.getCurrentUser();
     }
-
 
     private void initMobSms() {
         SMSSDK.initSDK(this, "15d5d9bc15762", "6e9211264302886949713acc7be1eef3");
@@ -110,12 +112,14 @@ public class MyApplication extends android.support.multidex.MultiDexApplication 
     private void initDBUtils() {
         new DBUtils(this);
     }
+
     private void initSoundPool() {
-        mSoundPool = new SoundPool(2, AudioManager.STREAM_MUSIC,0);
+        mSoundPool = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
         //预加载音乐
         mDuanSound = mSoundPool.load(this, R.raw.duan, 1);
         mYuluSound = mSoundPool.load(this, R.raw.yulu, 1);
     }
+
     private void initLitepal() {
         LitePalApplication.initialize(this);
     }
@@ -136,7 +140,7 @@ public class MyApplication extends android.support.multidex.MultiDexApplication 
         // 为了防止环信SDK被初始化2次，加此判断会保证SDK被初始化1次
         // 默认的APP会在以包名为默认的process name下运行，如果查到的process name不是APP的process name就立即返回
 
-        if (processAppName == null ||!processAppName.equalsIgnoreCase(this.getPackageName())) {
+        if (processAppName == null || !processAppName.equalsIgnoreCase(this.getPackageName())) {
             Log.e(TAG, "enter the service process!");
             // 则此application::onCreate 是被service 调用的，直接返回
             return;
@@ -156,7 +160,6 @@ public class MyApplication extends android.support.multidex.MultiDexApplication 
     }
 
 
-
     private void initConnectListener() {
         EMClient.getInstance().addConnectionListener(new EMConnectionListener() {
             @Override
@@ -165,7 +168,7 @@ public class MyApplication extends android.support.multidex.MultiDexApplication 
 
             @Override
             public void onDisconnected(int i) {
-                if (i== EMError.USER_LOGIN_ANOTHER_DEVICE){
+                if (i == EMError.USER_LOGIN_ANOTHER_DEVICE) {
                     //被挤掉线了
                     //重新跳转到登录界面
                     Intent intent = new Intent(MyApplication.this, LoginActivity.class);
@@ -180,7 +183,7 @@ public class MyApplication extends android.support.multidex.MultiDexApplication 
                     ThreadUtils.runOnUIThread(new Runnable() {
                         @Override
                         public void run() {
-                            ToastUtils.showToast(getApplicationContext(),"您的账号在其他设备登录了，请重新登录！");
+                            ToastUtils.showToast(getApplicationContext(), "您的账号在其他设备登录了，请重新登录！");
                         }
                     });
 
@@ -238,20 +241,20 @@ public class MyApplication extends android.support.multidex.MultiDexApplication 
         EMMessageBody body = emMessage.getBody();
         if (body instanceof EMTextMessageBody) {
             EMTextMessageBody emTextMessageBody = (EMTextMessageBody) body;
-             message = emTextMessageBody.getMessage();
+            message = emTextMessageBody.getMessage();
         }
 
-        Intent mainIntent = new Intent(this,MainActivity.class);
+        Intent mainIntent = new Intent(this, MainActivity.class);
         //因为在非Activity中不允许启动Activity，如果要启动必须添加如下flag
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         Intent chatIntent = new Intent(this, ChatActivityEaseUI.class);
-        chatIntent.putExtra(EaseConstant.EXTRA_USER_ID,emMessage.getFrom());
-        chatIntent.putExtra(EaseConstant.EXTRA_CHAT_TYPE,EMMessage.ChatType.Chat);
+        chatIntent.putExtra(EaseConstant.EXTRA_USER_ID, emMessage.getFrom());
+        chatIntent.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat);
 
-        Intent[] intents = {mainIntent,chatIntent};
+        Intent[] intents = {mainIntent, chatIntent};
 
-        PendingIntent pendingIntent = PendingIntent.getActivities(this,1,intents,PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivities(this, 1, intents, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification notification = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
             notification = new Notification.Builder(this)
@@ -261,11 +264,11 @@ public class MyApplication extends android.support.multidex.MultiDexApplication 
                     .setSmallIcon(R.mipmap.message)
                     .setContentTitle("你有一条新消息")
                     .setContentText(message)
-                    .setContentInfo("来自"+emMessage.getFrom())
+                    .setContentInfo("来自" + emMessage.getFrom())
                     .setContentIntent(pendingIntent)
                     .build();
         }
-        mNotificationManager.notify(1,notification);
+        mNotificationManager.notify(1, notification);
     }
 
     private void initContactListener() {
@@ -295,7 +298,7 @@ public class MyApplication extends android.support.multidex.MultiDexApplication 
                     EMClient.getInstance().contactManager().acceptInvitation(username);
                 } catch (HyphenateException e) {
                     e.printStackTrace();
-                    Log.d(TAG, "onContactInvited: 添加好友失败："+e);
+                    Log.d(TAG, "onContactInvited: 添加好友失败：" + e);
                 }
             }
 
@@ -331,7 +334,7 @@ public class MyApplication extends android.support.multidex.MultiDexApplication 
         return processName;
     }
 
-    private boolean isRuningBackground(){
+    private boolean isRuningBackground() {
         /**
          * 获取手机中所有正在运行的任务栈
          * 需要权限： <uses-permission android:name="android.permission.GET_TASKS"/>
@@ -342,9 +345,9 @@ public class MyApplication extends android.support.multidex.MultiDexApplication 
         //获取任务栈中第一个Activity
         ComponentName topActivity = runningTaskInfo.topActivity;
         //如果这个Activity的包名和app的包名一致则说明在前台
-        if (topActivity.getPackageName().equals(getPackageName())){
+        if (topActivity.getPackageName().equals(getPackageName())) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }

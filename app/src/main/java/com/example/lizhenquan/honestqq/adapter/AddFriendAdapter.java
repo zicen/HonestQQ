@@ -25,7 +25,6 @@ import java.util.List;
 public class AddFriendAdapter extends RecyclerView.Adapter<AddFriendAdapter.AddFriendViewHolder> implements View.OnClickListener {
     private  List<ContactBean> mContactList;
     private List<String> NameList = new ArrayList<>();
-
     private Context mContext;
     private    List<AVUser> mData;
     private  String TAG = "AddFriendAdapter";
