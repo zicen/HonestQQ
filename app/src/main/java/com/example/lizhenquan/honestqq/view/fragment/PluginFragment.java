@@ -60,7 +60,6 @@ public class PluginFragment extends BaseFragment implements PluginView2 {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         mPluginAdapter = new PluginAdapter(mContext, mShowItem);
         mRecyclerView.setAdapter(mPluginAdapter);
-
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {

@@ -8,9 +8,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.example.lizhenquan.honestqq.R;
 import com.example.lizhenquan.honestqq.adapter.FileViewPagerAdapter;
-import com.example.lizhenquan.honestqq.view.activity.BaseActivity;
 
 public class FileActivity extends BaseActivity {
 
@@ -18,6 +18,7 @@ public class FileActivity extends BaseActivity {
     private Toolbar mToorbar;
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
+    private GeoCoder mSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +26,15 @@ public class FileActivity extends BaseActivity {
         setContentView(R.layout.activity_file);
         initToorBar();
         initViewPager();
+        mSearch = GeoCoder.newInstance();
     }
 
     private void initViewPager() {
-
+       /* LatLng ptCenter = new LatLng((Float.valueOf(lat.getText()
+                .toString())), (Float.valueOf(lon.getText().toString())));
+        // 反Geo搜索
+        mSearch.reverseGeoCode(new ReverseGeoCodeOption()
+                .location(ptCenter));*/
         mTabLayout = (TabLayout) findViewById(R.id.tab_layout);
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
         FileViewPagerAdapter fileViewPagerAdapter = new FileViewPagerAdapter();

@@ -44,6 +44,7 @@ import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.model.EaseAtMessageHelper;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
 import com.hyphenate.easeui.utils.EaseUserUtils;
+import com.hyphenate.easeui.utils.ThreadUtils;
 import com.hyphenate.easeui.widget.EaseAlertDialog;
 import com.hyphenate.easeui.widget.EaseAlertDialog.AlertDialogUser;
 import com.hyphenate.easeui.widget.EaseChatExtendMenu;
@@ -53,6 +54,7 @@ import com.hyphenate.easeui.widget.EaseChatMessageList;
 import com.hyphenate.easeui.widget.EaseVoiceRecorderView;
 import com.hyphenate.easeui.widget.EaseVoiceRecorderView.EaseVoiceRecorderCallback;
 import com.hyphenate.easeui.widget.chatrow.EaseCustomChatRowProvider;
+import com.hyphenate.exceptions.EMServiceNotReadyException;
 import com.hyphenate.util.EMLog;
 import com.hyphenate.util.PathUtil;
 
@@ -67,48 +69,49 @@ import java.util.List;
  * you can see ChatActivity in demo for your reference
  */
 public class EaseChatFragment extends EaseBaseFragment implements EMMessageListener {
-    protected static final String TAG                 = "EaseChatFragment";
-    protected static final int    REQUEST_CODE_MAP    = 1;
-    protected static final int    REQUEST_CODE_CAMERA = 2;
-    protected static final int    REQUEST_CODE_LOCAL  = 3;
+    protected static final String TAG = "EaseChatFragment";
+    protected static final int REQUEST_CODE_MAP = 1;
+    protected static final int REQUEST_CODE_CAMERA = 2;
+    protected static final int REQUEST_CODE_LOCAL = 3;
 
     /**
      * params to fragment
      */
-    protected Bundle              fragmentArgs;
-    protected int                 chatType;
-    protected String              toChatUsername;
+    protected Bundle fragmentArgs;
+    protected int chatType;
+    protected String toChatUsername;
     protected EaseChatMessageList messageList;
-    protected EaseChatInputMenu   inputMenu;
+    protected EaseChatInputMenu inputMenu;
 
     protected EMConversation conversation;
 
     protected InputMethodManager inputManager;
-    protected ClipboardManager   clipboard;
+    protected ClipboardManager clipboard;
 
     protected Handler handler = new Handler();
-    protected File                  cameraFile;
+    protected File cameraFile;
     protected EaseVoiceRecorderView voiceRecorderView;
-    protected SwipeRefreshLayout    swipeRefreshLayout;
-    protected ListView              listView;
+    protected SwipeRefreshLayout swipeRefreshLayout;
+    protected ListView listView;
 
     protected boolean isloading;
     protected boolean haveMoreData = true;
-    protected int     pagesize     = 20;
+    protected int pagesize = 20;
     protected GroupListener groupListener;
-    protected EMMessage     contextMenuMessage;
+    protected EMMessage contextMenuMessage;
 
     static final int ITEM_TAKE_PICTURE = 1;
-    static final int ITEM_PICTURE      = 2;
-    static final int ITEM_LOCATION     = 3;
+    static final int ITEM_PICTURE = 2;
+    static final int ITEM_LOCATION = 3;
+    static final int ITEM_CALL = 4;
 
-    protected int[] itemStrings   = {R.string.attach_take_pic, R.string.attach_picture, R.string.attach_location};
+    protected int[] itemStrings = {R.string.attach_take_pic, R.string.attach_picture, R.string.attach_location, R.string.attach_call};
     protected int[] itemdrawables = {R.drawable.ease_chat_takepic_selector, R.drawable.ease_chat_image_selector,
-            R.drawable.ease_chat_location_selector};
-    protected int[] itemIds       = {ITEM_TAKE_PICTURE, ITEM_PICTURE, ITEM_LOCATION};
-    private   EMChatRoomChangeListener chatRoomChangeListener;
-    private   boolean                  isMessageListInited;
-    protected MyItemClickListener      extendMenuItemClickListener;
+            R.drawable.ease_chat_location_selector, R.drawable.ease_chat_call_selector};
+    protected int[] itemIds = {ITEM_TAKE_PICTURE, ITEM_PICTURE, ITEM_LOCATION, ITEM_CALL};
+    private EMChatRoomChangeListener chatRoomChangeListener;
+    private boolean isMessageListInited;
+    protected MyItemClickListener extendMenuItemClickListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -625,7 +628,35 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
                 case ITEM_LOCATION:
                     startActivityForResult(new Intent(getActivity(), EaseBaiduMapActivity.class), REQUEST_CODE_MAP);
                     break;
+                case ITEM_CALL:
+                    /**
+                     * 拨打语音通话
+                     * @param to
+                     * @throws EMServiceNotReadyException
+                     */
+                    ThreadUtils.runOnSubThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {//单参数
+                                EMClient.getInstance().callManager().makeVoiceCall(toChatUsername);
+                            } catch (EMServiceNotReadyException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            }
+                        }
+                    });
 
+
+                  /*  try {//多参数
+                        EMClient.getInstance().callManager().makeVoiceCall(toChatUsername,"ext 扩展内容");
+                    } catch (EMServiceNotReadyException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }*/
+
+                   /* //获取扩展内容
+                    String callExt = EMClient.getInstance().callManager().getCurrentCallSession().getExt();*/
+                    break;
                 default:
                     break;
             }

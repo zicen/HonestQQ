@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.media.AudioManager;
@@ -83,6 +84,9 @@ public class MyApplication extends android.support.multidex.MultiDexApplication 
         initMobSms();
         mBaseActivities = new ArrayList<>();
         mCurrentUser = AVUser.getCurrentUser();
+
+        IntentFilter callFilter = new IntentFilter(EMClient.getInstance().callManager().getIncomingCallBroadcastAction());
+       // registerReceiver(new CallReceiver(), callFilter);
     }
 
     private void initMobSms() {

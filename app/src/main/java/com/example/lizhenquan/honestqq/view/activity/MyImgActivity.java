@@ -6,7 +6,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
@@ -25,11 +27,16 @@ public class MyImgActivity extends AppCompatActivity {
     private List<String> mImgUrl;
     private RecyclerView recyclerView;
     private MyImgAdapter mAdapter;
+    private Toolbar my_img_toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_img);
+        my_img_toolbar = (Toolbar) findViewById(R.id.my_img_toolbar);
+        ImageView img_add_img = (ImageView) findViewById(R.id.img_add_img);
+        ImageView img_back = (ImageView) findViewById(R.id.img_back);
+        setSupportActionBar(my_img_toolbar);
         mImgUrl = new ArrayList<>();
 
 
