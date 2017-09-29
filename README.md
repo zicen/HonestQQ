@@ -13,4 +13,4 @@
 
 本项目在应用宝已上线
 --------
-* ![](https://github.com/zicen/HonestQQ/blob/master/image/Image.jpg)
+* ![](https://github.com/zicen/HonestQQ/blob/master/image/Image.png)
