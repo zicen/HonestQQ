@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/lltt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#DADADA"
+        android:gravity="center"
+        android:orientation="vertical">
+        <!--水波纹文本动画效果-->
+        <com.example.lizhenquan.honestqq.manager.TitanicTextView
+            android:id="@+id/my_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="加载中..."
+            android:textColor="#212121"
+            android:textSize="70sp"/>
+
+    </LinearLayout>
+
+</FrameLayout>

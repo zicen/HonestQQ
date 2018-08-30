@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/plugin_header"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageButton
+            android:id="@+id/plugin"
+            android:padding="15dp"
+            android:layout_width="0dp"
+            android:background="@drawable/plugin_selector"
+            android:layout_weight="1"
+            android:src="@mipmap/igs"
+            android:layout_height="match_parent"/>
+
+        <ImageButton
+            android:id="@+id/map"
+            android:padding="15dp"
+            android:background="@drawable/plugin_selector"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:src="@mipmap/igq"
+            android:layout_height="match_parent"/>
+
+        <ImageButton
+            android:id="@+id/ib_weather"
+            android:padding="15dp"
+            android:background="@drawable/plugin_selector"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:src="@mipmap/weather"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+<ImageView
+android:layout_width="match_parent"
+android:background="@color/greyShallow"
+android:layout_height="20dp"/>
+</LinearLayout>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:background="@color/colorPrimary">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:src="@mipmap/usericon"
+        app:civ_fill_color="#000"
+        app:civ_border_color="#fff"
+        app:civ_border_width="3dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/iv_head_icon"
+        android:layout_centerInParent="true"
+       />
+
+    <TextView
+        android:id="@+id/tv_nicname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="子辰"
+        android:textColor="#fff"
+        android:textSize="25sp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/iv_head_icon"
+        android:layout_centerHorizontal="true"/>
+
+
+    <!--原来QQ的布局代码-->
+
+ <!--   <ImageView
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:src="@mipmap/erweima"/>-->
+
+ <!--   <TextView
+        android:id="@+id/tv_nicname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="30dp"
+        android:drawableLeft="@mipmap/default_avatar"
+        android:text="子辰"
+        android:textColor="#fff"
+        android:textSize="30sp"/>-->
+
+   <!-- <LinearLayout
+        android:id="@+id/ll_level"
+        android:layout_below="@id/tv_nicname"
+        android:layout_alignLeft="@id/tv_nicname"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/sun"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/sun"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/sun"/>
+
+       &lt;!&ndash; <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/mooth"/>&ndash;&gt;
+    </LinearLayout>-->
+<!--<TextView
+    android:layout_below="@id/ll_level"
+    android:layout_alignLeft="@id/ll_level"
+    android:layout_marginTop="5dp"
+    android:textColor="#fff"
+    android:layout_width="wrap_content"
+    android:text="编辑个性签名"
+    android:drawableRight="@mipmap/qianming"
+    android:layout_height="wrap_content"/>-->
+
+</RelativeLayout>

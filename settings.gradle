@@ -1,0 +1,3 @@
+include ':app', ':easeUI_CN', ':barCodeTest'
+
+

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        1、name对应的属性值，开发者可以自由定义；
+        2、path对应的属性值，当前external-path标签下的相对路径
+        比如：/storage/emulated/0/92Recycle-release.apk
+        sdcard路径：/storage/emulated/0
+        相对路径：/
+    -->
+
+    <!--表示内部内存卡根目录，对应根目录等价于Context.getFilesDir()，查看完整路径：/data/user/0/包名/files-->
+    <root-path name="root_path" path="."/>
+    <!--表示外部内存卡根目录，对应根目录等价于Environment.getExternalStorageDirectory()，查看完整路径：/storage/emulated/0-->
+    <external-path name="external-path" path="."/>
+    <!--表示外部内存卡根目录下的APP公共目录，对应根目录等价于Context.getExternalFilesDir(String)，查看完整路径：/storage/emulated/0/Android/data/包名/files/Download-->
+    <external-files-path name="external-files-path" path="."/>
+    <!--表示内部内存卡根目录，对应根目录等价于Context.getFilesDir()，查看完整路径：/data/user/0/包名/files-->
+    <files-path name="files-path" path="."/>
+    <!--表示应用默认缓存根目录，对应根目录等价于getCacheDir()，查看完整路径：/data/user/0/包名/cache-->
+    <cache-path name="cache-path" path="."/>
+    <!--表示外部内存卡根目录下的APP缓存目录，对应根目录等价于Context.getExternalCacheDir()，查看完整路径：/storage/emulated/0/Android/data/包名/cache-->
+    <external-cache-path name="external-cache-path" path="."/>
+    <external-path name="external_files" path="."/>
+</paths>

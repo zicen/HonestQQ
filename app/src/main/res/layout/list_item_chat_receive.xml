@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/tv_time"
+        android:textColor="#9c9c9c"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:layout_gravity="center_horizontal"
+        android:text="上午9:03"
+        android:layout_margin="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/iv_avatar"
+            android:src="@mipmap/avatar1"
+            android:scaleType="centerCrop"
+            android:layout_margin="5dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+        <TextView
+            android:id="@+id/tv_msg"
+            android:layout_toRightOf="@id/iv_avatar"
+            android:text="你好"
+            android:textAllCaps="false"
+            android:background="@drawable/receive_msg_normal"
+            android:textSize="18sp"
+            android:layout_marginLeft="15dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+</LinearLayout>

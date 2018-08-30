@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
+    android:background="@mipmap/login_bk"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.lizhenquan.honestqq.view.activity.LoginActivity">
+    <ImageView
+        android:layout_gravity="center_horizontal"
+        android:layout_width="60dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="30dp"
+        android:src="@mipmap/iiicon"
+        android:layout_height="60dp"/>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:id="@+id/til_username"
+        android:layout_height="wrap_content">
+        <EditText
+            android:background="@drawable/et_back"
+            android:layout_margin="10dp"
+            android:inputType="text"
+            android:imeOptions="actionNext"
+            android:layout_width="match_parent"
+            android:id="@+id/et_username"
+            android:hint="用户名"
+            android:layout_height="wrap_content"/>
+
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+    android:layout_width="match_parent"
+    android:id="@+id/til_pwd"
+    android:layout_height="wrap_content">
+    <EditText
+        android:background="@drawable/et_back"
+        android:layout_margin="10dp"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:id="@+id/et_pwd"
+        android:hint="密码"
+        android:layout_height="wrap_content"/>
+
+</android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/login_selector"
+        android:layout_width="match_parent"
+        android:id="@+id/btn_register"
+        android:text="注册"
+        android:textColor="#fff"
+        android:textSize="23sp"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

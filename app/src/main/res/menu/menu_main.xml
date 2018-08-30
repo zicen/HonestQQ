@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--<item android:id="@+id/create_group" android:title="创建群聊" android:icon="@mipmap/create_group"></item>-->
+    <item
+        android:id="@+id/add_friend"
+        android:icon="@mipmap/add_friend"
+        android:title="加好友"></item>
+    <item
+        android:id="@+id/sweep"
+        android:icon="@mipmap/sweep"
+        android:title="扫一扫"></item>
+    <item
+        android:id="@+id/myqrcode"
+        android:icon="@mipmap/qrcode"
+        android:title="我的二维码"></item>
+    <!--<item-->
+        <!--android:id="@+id/take_pic"-->
+        <!--android:icon="@mipmap/take_pic"-->
+        <!--android:title="拍摄"></item>-->
+</menu>

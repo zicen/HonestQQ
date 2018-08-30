@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:custom="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+    <!--测试1111111111-->
+    <!--<TextView
+        android:layout_marginTop="150dp"
+        android:layout_centerHorizontal="true"
+       android:id="@+id/tv_plugin"
+        android:layout_width="wrap_content"
+        android:textSize="25sp"
+        android:text="更多功能，敬请期待！"
+        android:textColor="@color/colorPrimary"
+        android:layout_height="wrap_content"/>
+    <ImageView
+        android:layout_below="@+id/tv_plugin"
+        android:layout_centerInParent="true"
+        android:id="@+id/iv_nofriend_plugin"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@mipmap/monkey"></ImageView>
+-->
+
+    <com.daimajia.slider.library.SliderLayout
+        android:id="@+id/slider"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        custom:auto_cycle="true"
+        custom:indicator_visibility="visible"
+        custom:pager_animation="Accordion"
+        custom:pager_animation_span="1100"/>
+
+    <!--<com.daimajia.slider.library.Indicators.PagerIndicator
+        android:id="@+id/custom_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        custom:selected_color="#0095BF"
+        custom:selected_drawable="@drawable/bird"
+        custom:selected_height="6dp"
+        custom:selected_padding_left="5dp"
+        custom:selected_padding_right="5dp"
+        custom:selected_width="6dp"
+        custom:shape="oval"
+        custom:unselected_color="#55333333"
+        custom:unselected_height="6dp"
+        custom:unselected_padding_left="5dp"
+        custom:unselected_padding_right="5dp"
+        custom:unselected_width="6dp"
+        />-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/plugin_recycle_show"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+    <!--测试22222222-->
+    <!-- <android.support.percent.PercentRelativeLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         >
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:background="#fff"
+             android:orientation="vertical">
+            <com.example.lizhenquan.honestqq.wight.MineItemLayout
+                 android:id="@+id/ib_weather"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 app:image="@mipmap/weather"
+                 app:minetitle="查询天气"></com.example.lizhenquan.honestqq.wight.MineItemLayout>
+
+
+             <com.example.lizhenquan.honestqq.wight.MineItemLayout
+                 android:id="@+id/mil_blog"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 app:image="@mipmap/blog"
+                 app:minetitle="我的博客"></com.example.lizhenquan.honestqq.wight.MineItemLayout>
+         </LinearLayout>
+
+         <RelativeLayout
+             android:id="@+id/rl_header"
+             android:layout_width="0dp"
+             android:layout_height="0dp"
+             app:layout_widthPercent = "100%"
+             android:background="@color/colorPrimary"
+             app:layout_heightPercent="30%"
+             android:layout_alignParentTop="true"
+             android:layout_alignParentLeft="true"
+             android:layout_alignParentStart="true">
+             <de.hdodenhof.circleimageview.CircleImageView
+                 android:id="@+id/civ_portrait"
+                 android:layout_width="80dp"
+                 android:layout_height="80dp"
+                 android:layout_centerInParent="true"
+                 android:src="@mipmap/icon"
+                 app:civ_fill_color="#000"
+                 app:civ_border_color="#fff"
+                 app:civ_border_width="3dp"
+                 />
+             <TextView
+                 android:layout_below="@+id/civ_portrait"
+                 android:layout_centerInParent="true"
+                 android:id="@+id/tv_username"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="10dp"
+                 android:text="username"
+                 android:textColor="#fff"
+                 android:textSize="16sp"/>
+         </RelativeLayout>
+     </android.support.percent.PercentRelativeLayout>-->
+
+
+</LinearLayout>

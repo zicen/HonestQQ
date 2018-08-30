@@ -1,0 +1,42 @@
+[
+    {
+        "merged": "E:\\donwload\\HonestQQ-master\\HonestQQ-master\\barCodeTest\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_camera.xml.flat",
+        "source": "E:\\donwload\\HonestQQ-master\\HonestQQ-master\\barCodeTest\\build\\intermediates\\bundles\\debug\\res\\layout\\camera.xml"
+    },
+    {
+        "merged": "E:\\donwload\\HonestQQ-master\\HonestQQ-master\\barCodeTest\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_ic_launcher.png.flat",
+        "source": "E:\\donwload\\HonestQQ-master\\HonestQQ-master\\barCodeTest\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\ic_launcher.png"
+    },
+    {
+        "merged": "E:\\donwload\\HonestQQ-master\\HonestQQ-master\\barCodeTest\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ic_launcher.png.flat",
+        "source": "E:\\donwload\\HonestQQ-master\\HonestQQ-master\\barCodeTest\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ic_launcher.png"
+    },
+    {
+        "merged": "E:\\donwload\\HonestQQ-master\\HonestQQ-master\\barCodeTest\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw_beep.ogg.flat",
+        "source": "E:\\donwload\\HonestQQ-master\\HonestQQ-master\\barCodeTest\\build\\intermediates\\bundles\\debug\\res\\raw\\beep.ogg"
+    },
+    {
+        "merged": "E:\\donwload\\HonestQQ-master\\HonestQQ-master\\barCodeTest\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_main.xml.flat",
+        "source": "E:\\donwload\\HonestQQ-master\\HonestQQ-master\\barCodeTest\\build\\intermediates\\bundles\\debug\\res\\layout\\main.xml"
+    },
+    {
+        "merged": "E:\\donwload\\HonestQQ-master\\HonestQQ-master\\barCodeTest\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_icon_back_black_2.png.flat",
+        "source": "E:\\donwload\\HonestQQ-master\\HonestQQ-master\\barCodeTest\\build\\intermediates\\bundles\\debug\\res\\drawable\\icon_back_black_2.png"
+    },
+    {
+        "merged": "E:\\donwload\\HonestQQ-master\\HonestQQ-master\\barCodeTest\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldpi-v4_ic_launcher.png.flat",
+        "source": "E:\\donwload\\HonestQQ-master\\HonestQQ-master\\barCodeTest\\build\\intermediates\\bundles\\debug\\res\\drawable-ldpi-v4\\ic_launcher.png"
+    },
+    {
+        "merged": "E:\\donwload\\HonestQQ-master\\HonestQQ-master\\barCodeTest\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw_realm_properties.flat",
+        "source": "E:\\donwload\\HonestQQ-master\\HonestQQ-master\\barCodeTest\\build\\intermediates\\bundles\\debug\\res\\raw\\realm_properties"
+    },
+    {
+        "merged": "E:\\donwload\\HonestQQ-master\\HonestQQ-master\\barCodeTest\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_icon_back_white_2.png.flat",
+        "source": "E:\\donwload\\HonestQQ-master\\HonestQQ-master\\barCodeTest\\build\\intermediates\\bundles\\debug\\res\\drawable\\icon_back_white_2.png"
+    },
+    {
+        "merged": "E:\\donwload\\HonestQQ-master\\HonestQQ-master\\barCodeTest\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_navbar.9.png.flat",
+        "source": "E:\\donwload\\HonestQQ-master\\HonestQQ-master\\barCodeTest\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\navbar.9.png"
+    }
+]

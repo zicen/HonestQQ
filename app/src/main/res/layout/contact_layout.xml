@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+<android.support.v4.widget.SwipeRefreshLayout
+    android:id="@+id/swipeRefreshLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycleview_contact"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+</android.support.v4.widget.SwipeRefreshLayout>
+    <TextView
+        android:visibility="invisible"
+        android:text="A"
+        android:gravity="center"
+        android:textAllCaps="false"
+        android:id="@+id/tv_float"
+        android:layout_centerInParent="true"
+        android:textColor="#fff"
+        android:textSize="40sp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:background="@drawable/ease_show_head_toast_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+<com.example.lizhenquan.honestqq.wight.SlideBar
+    android:id="@+id/slidebar"
+    android:layout_alignParentRight="true"
+    android:layout_width="30dp"
+    android:layout_height="match_parent"/>
+
+</RelativeLayout>

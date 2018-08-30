@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SettingItemView">
+        <attr name="title" format="string" />
+        <attr name="rightText" format="boolean"/>
+        <attr name="rightImage" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="MineItemLayout">
+        <attr name="minetitle" format="string" />
+        <attr name="image" format="reference" />
+    </declare-styleable>
+
+</resources>
