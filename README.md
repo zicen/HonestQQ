@@ -8,12 +8,12 @@
 
 * ![](https://github.com/zicen/HonestQQ/blob/version2/image/S70929-143421.png)
 
-* ![](https://github.com/zicen/HonestQQ/blob/master/image/S70929-143432.jpg)
+* ![](https://github.com/zicen/HonestQQ/blob/version2/image/S70929-143432.jpg)
 
-* ![](https://github.com/zicen/HonestQQ/blob/master/image/S70929-143458.jpg)
+* ![](https://github.com/zicen/HonestQQ/blob/version2/image/S70929-143458.jpg)
 
-* ![](https://github.com/zicen/HonestQQ/blob/master/image/S70929-143505.jpg)
+* ![](https://github.com/zicen/HonestQQ/blob/version2/image/S70929-143505.jpg)
 
 本项目在应用宝已上线
 --------
-* ![](https://github.com/zicen/HonestQQ/blob/master/image/Image.png)
+* ![](https://github.com/zicen/HonestQQ/blob/version2/image/Image.png)
